@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NyhedsBlog_Backend.CoreDomainTest\\NyhedsBlog_Backend.CoreDomainTest.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NyhedsBlog_Backend.CoreDomainTest\\NyhedsBlog_Backend.CoreDomainTest.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NyhedsBlog_Backend.CoreDomainTest\\NyhedsBlog_Backend.CoreDomainTest.csproj",
+        "projectName": "NyhedsBlog_Backend.CoreDomainTest",
+        "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NyhedsBlog_Backend.CoreDomainTest\\NyhedsBlog_Backend.CoreDomainTest.csproj",
+        "packagesPath": "C:\\Users\\Christian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NyhedsBlog_Backend.CoreDomainTest\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Christian\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>NyhedsBlog_Backend.CoreDomainTest</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="CoreTests" />
+      <Folder Include="DomainTests" />
+    </ItemGroup>
+
+</Project>
