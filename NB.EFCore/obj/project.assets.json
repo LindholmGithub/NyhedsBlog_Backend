@@ -468,6 +468,29 @@
             "rid": "win"
           }
         }
+      },
+      "NB.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/NB.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NB.Core.dll": {}
+        }
+      },
+      "NB.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "NB.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/NB.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NB.Domain.dll": {}
+        }
       }
     }
   },
@@ -1435,12 +1458,23 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "NB.Core/1.0.0": {
+      "type": "project",
+      "path": "../NB.Core/NB.Core.csproj",
+      "msbuildProject": "../NB.Core/NB.Core.csproj"
+    },
+    "NB.Domain/1.0.0": {
+      "type": "project",
+      "path": "../NB.Domain/NB.Domain.csproj",
+      "msbuildProject": "../NB.Domain/NB.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "Microsoft.EntityFrameworkCore >= 5.0.17",
-      "MySql.EntityFrameworkCore >= 5.0.16"
+      "MySql.EntityFrameworkCore >= 5.0.16",
+      "NB.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1467,7 +1501,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj": {
+              "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

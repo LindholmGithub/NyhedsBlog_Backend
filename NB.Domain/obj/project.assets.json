@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "NB.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/NB.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NB.Core.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "NB.Core/1.0.0": {
+      "type": "project",
+      "path": "../NB.Core/NB.Core.csproj",
+      "msbuildProject": "../NB.Core/NB.Core.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "NB.Core >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Christian\\.nuget\\packages\\": {}
@@ -31,7 +50,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj": {
+              "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
