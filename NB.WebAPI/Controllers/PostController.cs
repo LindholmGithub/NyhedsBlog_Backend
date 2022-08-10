@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NB.WebAPI.DTO;
-using NB.WebAPI.DTO.CustomerDTO;
+using NB.WebAPI.DTO.PostDTO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 
@@ -14,17 +14,17 @@ namespace NB.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class PostController : ControllerBase
     {
-        private readonly ICustomerService _service;
+        private readonly IPostService _service;
 
-        public CustomerController(ICustomerService service)
+        public PostController(IPostService service)
         {
             _service = service;
         }
-
+        
         [HttpGet]
-        public ActionResult<IEnumerable<Customer_DTO_Out>> GetAll()
+        public ActionResult<IEnumerable<Post_DTO_Out>> GetAll()
         {
             try
             {
@@ -36,8 +36,9 @@ namespace NB.WebAPI.Controllers
             }
         }
 
+        
         [HttpGet("{id:int}")]
-        public ActionResult<Customer_DTO_Out> GetById(int id)
+        public ActionResult<Post_DTO_Out> GetById(int id)
         {
             try
             {
@@ -57,20 +58,18 @@ namespace NB.WebAPI.Controllers
             }
         }
 
+        
         [HttpPost]
-        public ActionResult<Customer_DTO_Out> CreateCustomer([FromBody] Customer_DTO_In data)
+        public ActionResult<Post_DTO_Out> CreatePost([FromBody] Post_DTO_In data)
         {
             try
             {
-                return Ok(Conversion(_service.CreateCustomer(new Customer
+                return Ok(Conversion(_service.CreatePost(new Post
                 {
-                    Firstname = data.Firstname,
-                    Lastname = data.Lastname,
-                    Email = data.Email,
-                    PhoneNumber = data.PhoneNumber,
-                    Username = data.Username,
-                    Password = data.Password,
-                    //Subscription = new Subscription {Id = data.SubscriptionId}
+                    Title = data.Title,
+                    Author = data.Author,
+                    Content = data.Content,
+                    Date = data.Date
                 })));
             }
             catch (ArgumentException ae)
@@ -83,21 +82,17 @@ namespace NB.WebAPI.Controllers
             }
         }
 
+        
         [HttpPut("{id:int}")]
-        public ActionResult<Customer_DTO_Out> UpdateCustomer(int id, Customer_DTO_In data)
+        public ActionResult<Post_DTO_Out> UpdatePost(int id, [FromBody] Post_DTO_In data)
         {
             try
             {
-                return Ok(Conversion(_service.UpdateCustomer(new Customer
-                {
-                    Id = id,
-                    Firstname = data.Firstname,
-                    Lastname = data.Lastname,
-                    Email = data.Email,
-                    PhoneNumber = data.PhoneNumber,
-                    Username = data.Username,
-                    Password = data.Password,
-                    //Subscription = new Subscription {Id = data.SubscriptionId}
+                return Ok(Conversion(_service.UpdatePost(new Post{
+                    Title = data.Title,
+                    Author = data.Author,
+                    Content = data.Content,
+                    Date = data.Date
                 })));
             }
             catch (ArgumentException ae)
@@ -110,12 +105,13 @@ namespace NB.WebAPI.Controllers
             }
         }
 
+        
         [HttpDelete("{id:int}")]
-        public ActionResult<Customer_DTO_Out> Delete(int id)
+        public ActionResult<Post_DTO_Out> DeletePost(int id)
         {
             try
             {
-                return Ok(Conversion(_service.DeleteCustomer(new Customer {Id = id})));
+                return Ok(Conversion(_service.DeletePost(new Post {Id = id})));
             }
             catch (ArgumentException ae)
             {
@@ -127,19 +123,16 @@ namespace NB.WebAPI.Controllers
             }
         }
         
-        //Conversion from Customer to Customer_DTO_Out
-        private Customer_DTO_Out Conversion(Customer c)
+        //Conversion from Post to Post_DTO_Out
+        private Post_DTO_Out Conversion(Post p)
         {
-            return new Customer_DTO_Out
+            return new Post_DTO_Out
             {
-                Id = c.Id,
-                Firstname = c.Firstname,
-                Lastname = c.Lastname,
-                Email = c.Email,
-                PhoneNumber = c.PhoneNumber,
-                Username = c.Username,
-                Password = c.Password,
-                //Subscription = c.Subscription
+                Id = p.Id,
+                Title = p.Title,
+                Content = p.Content,
+                Author = p.Author,
+                Date = p.Date
             };
         }
     }

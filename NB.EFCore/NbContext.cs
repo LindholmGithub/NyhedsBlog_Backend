@@ -12,6 +12,8 @@ namespace NB.EFCore
         
         public DbSet<CustomerEntity> Customers { get; set; }
         
+        public DbSet<PostEntity> Posts { get; set; }
+
         public DbSet<SubscriptionEntity> Subscriptions { get; set; }
     }
 }

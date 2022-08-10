@@ -70,6 +70,9 @@ namespace NB.WebAPI
             //Dependency Injections Here
             services.AddScoped<ICreateReadRepository<Customer>,CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
+            
+            services.AddScoped<ICreateReadRepository<Post>,PostRepository>();
+            services.AddScoped<IPostService, PostService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
