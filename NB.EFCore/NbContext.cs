@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NB.EFCore.Entities;
 
 namespace NB.EFCore
 {
@@ -9,5 +10,8 @@ namespace NB.EFCore
             
         }
         
+        public DbSet<CustomerEntity> Customers { get; set; }
+        
+        public DbSet<SubscriptionEntity> Subscriptions { get; set; }
     }
 }

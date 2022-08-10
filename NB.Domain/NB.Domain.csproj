@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Services" />
+      <ProjectReference Include="..\NB.Core\NB.Core.csproj" />
     </ItemGroup>
 
 </Project>

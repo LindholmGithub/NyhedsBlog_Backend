@@ -6,12 +6,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using NB.EFCore;
+using NB.EFCore.Repositories;
+using NyhedsBlog_Backend.Core.IServices;
+using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Domain.IRepositories;
+using NyhedsBlog_Backend.Domain.Services;
 
 namespace NB.WebAPI
 {
@@ -30,13 +36,23 @@ namespace NB.WebAPI
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "NB.WebAPI", Version = "v1"}); });
             
+            var loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
+
+            //Main Application DB CTX
+            services.AddDbContext<NbContext>(opt =>
+            {
+                opt
+                    .UseLoggerFactory(loggerFactory)
+                    .UseSqlite("Data Source=appDb.db");
+            });
+            
             //CORS Policy Setup
             services.AddCors(options =>
             {
                 options.AddPolicy("Dev-cors", policy =>
                 {
                     policy
-                        .AllowAnyOrigin()
+                        .WithOrigins("http://localhost:4200")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -51,9 +67,9 @@ namespace NB.WebAPI
             
             services.AddHttpContextAccessor();
             
-            //Add Dependency Injections Here
-            //services.AddScoped<REPOSITORY_INTERFACE<MODEL>,MODEL_REPOSITORY>();
-            //services.AddScoped<SERVICE_INTERFACE, MODEL_SERVICE>();
+            //Dependency Injections Here
+            services.AddScoped<ICreateReadRepository<Customer>,CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

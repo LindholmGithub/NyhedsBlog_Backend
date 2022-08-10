@@ -5,9 +5,4 @@
         <RootNamespace>NyhedsBlog_Backend.Core</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="IServices" />
-      <Folder Include="Models" />
-    </ItemGroup>
-
 </Project>
