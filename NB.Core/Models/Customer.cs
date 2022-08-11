@@ -11,6 +11,6 @@
         public string Username { get; set; }
         public string Password { get; set; }
         
-        //public Subscription Subscription { get; set; }
+        public Subscription.Subscription Subscription { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using NB.WebAPI.DTO;
 using NB.WebAPI.DTO.PostDTO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Post;
 
 namespace NB.WebAPI.Controllers
 {

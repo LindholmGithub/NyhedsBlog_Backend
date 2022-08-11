@@ -2,6 +2,7 @@
 using System.IO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Post;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NyhedsBlog_Backend.Domain.Services

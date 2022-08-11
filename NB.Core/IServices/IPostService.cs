@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Post;
 
 namespace NyhedsBlog_Backend.Core.IServices
 {

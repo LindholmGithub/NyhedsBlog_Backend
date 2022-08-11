@@ -16,6 +16,7 @@ using NB.EFCore;
 using NB.EFCore.Repositories;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Post;
 using NyhedsBlog_Backend.Domain.IRepositories;
 using NyhedsBlog_Backend.Domain.Services;
 

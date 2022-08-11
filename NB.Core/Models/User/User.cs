@@ -1,4 +1,4 @@
-﻿namespace NyhedsBlog_Backend.Core.Models
+﻿namespace NyhedsBlog_Backend.Core.Models.User
 {
     public class User
     {
@@ -9,5 +9,6 @@
         public int PhoneNumber { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public UserRole Role { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.VisualBasic;
 using NB.EFCore.Entities;
 using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Post;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NB.EFCore.Repositories
