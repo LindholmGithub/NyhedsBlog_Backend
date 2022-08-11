@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj": {}
+    "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj": {
+    "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj",
+        "projectUniqueName": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj",
         "projectName": "NB.CoreDomainTest",
-        "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj",
-        "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.CoreDomainTest\\obj\\",
+        "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj",
+        "packagesPath": "C:\\Users\\Christian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.CoreDomainTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Christian\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

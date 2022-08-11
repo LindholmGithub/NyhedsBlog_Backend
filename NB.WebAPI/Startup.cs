@@ -17,6 +17,7 @@ using NB.EFCore.Repositories;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
+using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Domain.IRepositories;
 using NyhedsBlog_Backend.Domain.Services;
 
@@ -71,6 +72,9 @@ namespace NB.WebAPI
             //Dependency Injections Here
             services.AddScoped<ICreateReadRepository<Customer>,CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
+
+            services.AddScoped<ICreateReadRepository<Subscription>, SubscriptionRepository>();
+            services.AddScoped<ISubscriptionService, SubscriptionService>();
             
             services.AddScoped<ICreateReadRepository<Post>,PostRepository>();
             services.AddScoped<IPostService, PostService>();
@@ -79,6 +83,7 @@ namespace NB.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -45,7 +45,7 @@ namespace NB.EFCore.Repositories
                 PhoneNumber = obj.PhoneNumber,
                 Username = obj.Username,
                 Password = obj.Password,
-                //SubscriptionId = obj.Subscription.Id
+                SubscriptionId = obj.Subscription.Id
             };
             _ctx.ChangeTracker.Clear();
             _ctx.Customers.Update(newEntity);

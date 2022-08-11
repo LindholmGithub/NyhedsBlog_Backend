@@ -11,7 +11,7 @@ namespace NB.EFCore.Entities
         public string Username { get; set; }
         public string Password { get; set; }
         
-        //public SubscriptionEntity Subscription { get; set; }
-        //public int SubscriptionId { get; set; }
+        public SubscriptionEntity Subscription { get; set; }
+        public int SubscriptionId { get; set; }
     }
 }

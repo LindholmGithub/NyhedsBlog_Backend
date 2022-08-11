@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using NB.EFCore.Entities;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
+using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NB.EFCore.Repositories
 {
     public class PostRepository : ICreateReadRepository<Post>
     {
+        /*
         private readonly NbContext _ctx;
 
         public PostRepository(NbContext ctx)
@@ -23,7 +26,7 @@ namespace NB.EFCore.Repositories
             var newEntity = _ctx.Posts.Add(new PostEntity
             {
                 Title = obj.Title,
-                Author = obj.Author,
+                UserId = obj.Author.Id,
                 Content = obj.Content,
                 Date = obj.Date
             }).Entity;
@@ -37,7 +40,7 @@ namespace NB.EFCore.Repositories
             var newEntity = new PostEntity
             {
                 Title = obj.Title,
-                Author = obj.Author,
+                UserId = obj.Author.Id,
                 Content = obj.Content,
                 Date = obj.Date
             };
@@ -75,15 +78,56 @@ namespace NB.EFCore.Repositories
         
         private IQueryable<Post> Conversion()
         {
+            
             return _ctx.Posts
+                .Include(post => post.Author)
                 .Select(post => new Post()
                 {
                     Id = post.Id,
                     Title = post.Title,
-                    Author = post.Author,
+                    Author = new User
+                    {
+                        Id = post.Author.Id,
+                        Email = post.Author.Email,
+                        Firstname = post.Author.Firstname,
+                        Lastname = post.Author.Lastname,
+                        PhoneNumber = post.Author.PhoneNumber,
+                        Username = post.Author.Username,
+                        Password = post.Author.Password
+                    },
                     Content = post.Content,
                     Date = post.Date
                 });
+        }
+        */
+        public Post Create(Post obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Post Update(Post obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Post Delete(Post obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Post GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Post> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Post> Search(string term)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
