@@ -25,7 +25,7 @@ namespace NB.WebAPI.Controllers
                 return Ok(new Auth_DTO_Out
                 {
                     Status = 200,
-                    Message = "base64string"
+                    Message = "base64stringg"
                 });
             }
             
