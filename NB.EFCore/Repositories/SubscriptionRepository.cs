@@ -33,6 +33,7 @@ namespace NB.EFCore.Repositories
         {
             var newEntity = new SubscriptionEntity
             {
+                Id = obj.Id,
                 Type = (int) obj.Type,
                 DateFrom = obj.DateFrom,
                 DateTo = obj.DateTo

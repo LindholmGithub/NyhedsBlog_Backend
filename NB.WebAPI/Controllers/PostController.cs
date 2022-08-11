@@ -10,6 +10,7 @@ using NB.WebAPI.DTO.PostDTO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
+using NyhedsBlog_Backend.Core.Models.User;
 
 namespace NB.WebAPI.Controllers
 {
@@ -68,7 +69,8 @@ namespace NB.WebAPI.Controllers
                 return Ok(Conversion(_service.CreatePost(new Post
                 {
                     Title = data.Title,
-                    Author = data.Author,
+                    Author = new User{Id = data.AuthorId},
+                    Category = new Category{Id = data.CategoryId},
                     Content = data.Content,
                     Date = data.Date
                 })));
@@ -90,8 +92,10 @@ namespace NB.WebAPI.Controllers
             try
             {
                 return Ok(Conversion(_service.UpdatePost(new Post{
+                    Id = id,
                     Title = data.Title,
-                    Author = data.Author,
+                    Author = new User{Id = data.AuthorId},
+                    Category = new Category{Id = data.CategoryId},
                     Content = data.Content,
                     Date = data.Date
                 })));
@@ -131,6 +135,7 @@ namespace NB.WebAPI.Controllers
             {
                 Id = p.Id,
                 Title = p.Title,
+                Category = p.Category,
                 Content = p.Content,
                 Author = p.Author,
                 Date = p.Date

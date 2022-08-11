@@ -5,27 +5,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using NB.WebAPI.DTO;
-using NB.WebAPI.DTO.SubscriptionDTO;
+using NB.WebAPI.DTO.CategoryDTO;
 using NyhedsBlog_Backend.Core.IServices;
-using NyhedsBlog_Backend.Core.Models.Subscription;
+using NyhedsBlog_Backend.Core.Models.Post;
 
 namespace NB.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubscriptionController : ControllerBase
+    public class CategoryController : ControllerBase
     {
-        private readonly ISubscriptionService _service;
+        private readonly ICategoryService _service;
 
-        public SubscriptionController(ISubscriptionService service)
+        public CategoryController(ICategoryService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Subscription_DTO_Out>> GetAll()
+        public ActionResult<IEnumerable<Category_DTO_Out>> GetAll()
         {
             try
             {
@@ -34,12 +33,11 @@ namespace NB.WebAPI.Controllers
             catch (Exception e)
             {
                 return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
-
             }
         }
-
+        
         [HttpGet("{id:int}")]
-        public ActionResult<Subscription_DTO_Out> GetById(int id)
+        public ActionResult<Category_DTO_Out> GetById(int id)
         {
             try
             {
@@ -53,22 +51,17 @@ namespace NB.WebAPI.Controllers
             {
                 return NotFound(new Error_DTO(404, e.Message));
             }
-            catch (Exception e)
-            {
-                return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
-            }
         }
 
         [HttpPost]
-        public ActionResult<Subscription_DTO_Out> CreateSubscription([FromBody] Subscription_DTO_In data)
+        public ActionResult<Category_DTO_Out> CreateCategory([FromBody] Category_DTO_In data)
         {
             try
             {
-                return Ok(Conversion(_service.CreateSubscription(new Subscription
+                return Ok(Conversion(_service.CreateCategory(new Category
                 {
-                    DateFrom = data.DateFrom,
-                    DateTo = data.DateTo,
-                    Type = data.Type
+                    Title = data.Title,
+                    Description = data.Description
                 })));
             }
             catch (ArgumentException ae)
@@ -80,16 +73,17 @@ namespace NB.WebAPI.Controllers
                 return StatusCode(500, new Error_DTO(500,e.Message));
             }
         }
-        
+
         [HttpPut("{id:int}")]
-        public ActionResult<Subscription_DTO_Out> UpdateSubscription(int id, [FromBody] Subscription_DTO_In data)
+        public ActionResult<Category_DTO_Out> UpdateCategory(int id, Category_DTO_In data)
         {
             try
             {
-                return Ok(Conversion(_service.UpdateSubscription(new Subscription{
-                    DateFrom = data.DateFrom,
-                    DateTo = data.DateTo,
-                    Type = data.Type
+                return Ok(Conversion(_service.UpdateCategory(new Category
+                {
+                    Id = id,
+                    Title = data.Title,
+                    Description = data.Description
                 })));
             }
             catch (ArgumentException ae)
@@ -103,11 +97,11 @@ namespace NB.WebAPI.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult<Subscription_DTO_Out> DeleteSubscription(int id)
+        public ActionResult<Category_DTO_Out> DeleteCategory(int id)
         {
             try
             {
-                return Ok(Conversion(_service.DeleteSubscription(new Subscription{Id = id})));
+                return Ok(Conversion(_service.DeleteCategory(new Category{Id = id})));
             }
             catch (ArgumentException ae)
             {
@@ -118,14 +112,15 @@ namespace NB.WebAPI.Controllers
                 return StatusCode(500, new Error_DTO(500,ApiStrings.InternalServerError));
             }
         }
-        private Subscription_DTO_Out Conversion(Subscription s)
+
+        private Category_DTO_Out Conversion(Category c)
         {
-            return new Subscription_DTO_Out
+            return new Category_DTO_Out
             {
-                DateFrom = s.DateFrom,
-                DateTo = s.DateTo,
-                Type = s.Type
+                Id = c.Id,
+                Description = c.Description,
+                Title = c.Title
             };
-        }
+        } 
     }
 }

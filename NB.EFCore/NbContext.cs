@@ -13,10 +13,12 @@ namespace NB.EFCore
         
         public DbSet<CustomerEntity> Customers { get; set; }
         public DbSet<SubscriptionEntity> Subscriptions { get; set; }
-        //public DbSet<PostEntity> Posts { get; set; }
+        public DbSet<PostEntity> Posts { get; set; }
+        
+        public DbSet<CategoryEntity> Categories { get; set; }
         
         public DbSet<UserEntity> Users { get; set; }
         
-        public DbSet<CategoryEntity> Category { get; set; }
+        
     }
 }

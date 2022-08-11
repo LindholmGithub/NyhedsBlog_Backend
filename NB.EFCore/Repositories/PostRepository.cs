@@ -13,7 +13,7 @@ namespace NB.EFCore.Repositories
 {
     public class PostRepository : ICreateReadRepository<Post>
     {
-        /*
+        
         private readonly NbContext _ctx;
 
         public PostRepository(NbContext ctx)
@@ -27,6 +27,7 @@ namespace NB.EFCore.Repositories
             {
                 Title = obj.Title,
                 UserId = obj.Author.Id,
+                CategoryId = obj.Category.Id,
                 Content = obj.Content,
                 Date = obj.Date
             }).Entity;
@@ -39,8 +40,10 @@ namespace NB.EFCore.Repositories
         {
             var newEntity = new PostEntity
             {
+                Id = obj.Id,
                 Title = obj.Title,
                 UserId = obj.Author.Id,
+                CategoryId = obj.Category.Id,
                 Content = obj.Content,
                 Date = obj.Date
             };
@@ -80,7 +83,6 @@ namespace NB.EFCore.Repositories
         {
             
             return _ctx.Posts
-                .Include(post => post.Author)
                 .Select(post => new Post()
                 {
                     Id = post.Id,
@@ -95,39 +97,16 @@ namespace NB.EFCore.Repositories
                         Username = post.Author.Username,
                         Password = post.Author.Password
                     },
+                    Category = new Category
+                    {
+                        Id = post.Category.Id,
+                        Title = post.Category.Title,
+                        Description = post.Category.Description,
+                    },
                     Content = post.Content,
                     Date = post.Date
                 });
         }
-        */
-        public Post Create(Post obj)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Post Update(Post obj)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Post Delete(Post obj)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Post GetById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerable<Post> GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerable<Post> Search(string term)
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

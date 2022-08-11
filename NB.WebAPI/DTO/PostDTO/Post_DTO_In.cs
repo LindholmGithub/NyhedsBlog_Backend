@@ -7,10 +7,10 @@ namespace NB.WebAPI.DTO.PostDTO
 {
     public class Post_DTO_In
     {
-        public Category Category { get; set; }
+        public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public User Author { get; set; }
+        public int AuthorId { get; set; }
         
         public SubscriptionType RequiredSubscription { get; set; }
         public DateTime Date { get; set; }

@@ -40,6 +40,7 @@ namespace NB.EFCore.Repositories
         {
             var newEntity = new CustomerEntity
             {
+                Id = obj.Id,
                 Firstname = obj.Firstname,
                 Lastname = obj.Lastname,
                 Email = obj.Email,

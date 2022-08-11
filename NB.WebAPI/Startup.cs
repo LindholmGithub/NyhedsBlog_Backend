@@ -78,6 +78,9 @@ namespace NB.WebAPI
             
             services.AddScoped<ICreateReadRepository<Post>,PostRepository>();
             services.AddScoped<IPostService, PostService>();
+
+            services.AddScoped<ICreateReadRepository<Category>, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,7 +105,7 @@ namespace NB.WebAPI
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var ctx = scope.ServiceProvider.GetService<NbContext>();
-                //ctx.Database.EnsureDeleted();
+                ctx.Database.EnsureDeleted();
                 ctx.Database.EnsureCreated();
             }
             
