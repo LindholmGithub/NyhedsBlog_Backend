@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NB.WebAPI.DTO;
 using NB.WebAPI.DTO.CustomerDTO;
+using NB.WebAPI.DTO.SubscriptionDTO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 
@@ -51,10 +52,6 @@ namespace NB.WebAPI.Controllers
             {
                 return NotFound(new Error_DTO(404, e.Message));
             }
-            catch (Exception e)
-            {
-                return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
-            }
         }
 
         [HttpPost]
@@ -70,16 +67,11 @@ namespace NB.WebAPI.Controllers
                     PhoneNumber = data.PhoneNumber,
                     Username = data.Username,
                     Password = data.Password,
-                    //Subscription = new Subscription {Id = data.SubscriptionId}
                 })));
             }
             catch (ArgumentException ae)
             {
                 return BadRequest(new Error_DTO(400, ae.Message));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, new Error_DTO(500,e.Message));
             }
         }
 
@@ -97,7 +89,6 @@ namespace NB.WebAPI.Controllers
                     PhoneNumber = data.PhoneNumber,
                     Username = data.Username,
                     Password = data.Password,
-                    //Subscription = new Subscription {Id = data.SubscriptionId}
                 })));
             }
             catch (ArgumentException ae)
@@ -139,7 +130,12 @@ namespace NB.WebAPI.Controllers
                 PhoneNumber = c.PhoneNumber,
                 Username = c.Username,
                 Password = c.Password,
-                //Subscription = c.Subscription
+                Subscription = new Subscription_DTO_Out
+                {
+                    DateFrom = c.Subscription.DateFrom,
+                    DateTo = c.Subscription.DateTo,
+                    Type = c.Subscription.Type
+                }
             };
         }
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1pMJU9R1uV+dGzrRcqd5N1aV7efg0u8DvFm9W5uZO9ZHJWI5lMw4HuqyJeShBp0ga4HrOkS2rD8d7hEuxfrCuw==",
+  "dgSpecHash": "FQKmFiErXREBbMjp1zGFBjNe+KF1RNoKoUNsbG6kB8r+tsej2BRsnJWbZG/Nj+l8eK8EDgK1IcXBOEyRClqp/Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj",
+  "projectFilePath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.CoreDomainTest\\NB.CoreDomainTest.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

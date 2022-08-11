@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.WebAPI\\NB.WebAPI.csproj": {}
+    "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.WebAPI\\NB.WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj": {
+    "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj",
         "projectName": "NB.Core",
-        "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj",
-        "packagesPath": "C:\\Users\\Christian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Core\\obj\\",
+        "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj",
+        "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Christian\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -52,21 +52,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj": {
+    "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj",
         "projectName": "NB.Domain",
-        "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj",
-        "packagesPath": "C:\\Users\\Christian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj",
+        "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Christian\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -78,8 +78,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj": {
-                "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj"
+              "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj": {
+                "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Core\\NB.Core.csproj"
               }
             }
           }
@@ -108,21 +108,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj": {
+    "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj",
+        "projectUniqueName": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj",
         "projectName": "NB.EFCore",
-        "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj",
-        "packagesPath": "C:\\Users\\Christian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.EFCore\\obj\\",
+        "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj",
+        "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.EFCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Christian\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -134,8 +134,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj": {
-                "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj"
+              "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj": {
+                "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj"
               }
             }
           }
@@ -174,21 +174,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.WebAPI\\NB.WebAPI.csproj": {
+    "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.WebAPI\\NB.WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.WebAPI\\NB.WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.WebAPI\\NB.WebAPI.csproj",
         "projectName": "NB.WebAPI",
-        "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.WebAPI\\NB.WebAPI.csproj",
-        "packagesPath": "C:\\Users\\Christian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.WebAPI\\obj\\",
+        "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.WebAPI\\NB.WebAPI.csproj",
+        "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Christian\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -200,11 +200,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj": {
-                "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj"
+              "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj": {
+                "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.Domain\\NB.Domain.csproj"
               },
-              "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj": {
-                "projectPath": "C:\\Users\\Christian\\RiderProjects\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj"
+              "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj": {
+                "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\NyhedsBlog_Backend\\NB.EFCore\\NB.EFCore.csproj"
               }
             }
           }
@@ -250,7 +250,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

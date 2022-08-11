@@ -79,6 +79,7 @@ namespace NB.EFCore.Repositories
 
                     return new Subscription
                     {
+                        Id = sub.Id,
                         Type = type,
                         DateFrom = sub.DateFrom,
                         DateTo = sub.DateTo

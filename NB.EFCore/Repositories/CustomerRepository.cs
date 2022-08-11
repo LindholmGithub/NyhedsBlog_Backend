@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using NB.EFCore.Entities;
 using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NB.EFCore.Repositories
@@ -27,7 +28,7 @@ namespace NB.EFCore.Repositories
                 PhoneNumber = obj.PhoneNumber,
                 Username = obj.Username,
                 Password = obj.Password,
-                //SubscriptionId = obj.Subscription.Id
+                SubscriptionId = obj.Subscription.Id
                 
             }).Entity;
             _ctx.SaveChanges();
@@ -92,14 +93,13 @@ namespace NB.EFCore.Repositories
                     PhoneNumber = customer.PhoneNumber,
                     Username = customer.Username,
                     Password = customer.Password,
-                    /*Subscription = new Subscription
+                    Subscription = new Subscription
                     {
                         Id = customer.Subscription.Id,
-                        Type = customer.Subscription.Type,
+                        Type = (SubscriptionType) customer.Subscription.Type,
                         DateFrom = customer.Subscription.DateFrom,
                         DateTo = customer.Subscription.DateTo
                     }
-                    */
                 });
         }
     }

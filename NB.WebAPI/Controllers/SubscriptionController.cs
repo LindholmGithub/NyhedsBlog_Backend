@@ -122,7 +122,6 @@ namespace NB.WebAPI.Controllers
         {
             return new Subscription_DTO_Out
             {
-                Id = s.Id,
                 DateFrom = s.DateFrom,
                 DateTo = s.DateTo,
                 Type = s.Type
