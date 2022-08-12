@@ -6,6 +6,7 @@ using Microsoft.VisualBasic;
 using NB.EFCore.Entities;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
+using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
@@ -26,10 +27,11 @@ namespace NB.EFCore.Repositories
             var newEntity = _ctx.Posts.Add(new PostEntity
             {
                 Title = obj.Title,
-                UserId = obj.Author.Id,
+                AuthorId = obj.Author.Id,
                 CategoryId = obj.Category.Id,
                 Content = obj.Content,
-                Date = obj.Date
+                Date = obj.Date,
+                RequiredSubscription = (int) obj.RequiredSubscription
             }).Entity;
             _ctx.SaveChanges();
             
@@ -42,10 +44,11 @@ namespace NB.EFCore.Repositories
             {
                 Id = obj.Id,
                 Title = obj.Title,
-                UserId = obj.Author.Id,
+                AuthorId = obj.Author.Id,
                 CategoryId = obj.Category.Id,
                 Content = obj.Content,
-                Date = obj.Date
+                Date = obj.Date,
+                RequiredSubscription = (int) obj.RequiredSubscription
             };
             _ctx.ChangeTracker.Clear();
             _ctx.Posts.Update(newEntity);
@@ -83,6 +86,8 @@ namespace NB.EFCore.Repositories
         {
             
             return _ctx.Posts
+                .Include(entity => entity.Author)
+                .Include(entity => entity.Category)
                 .Select(post => new Post()
                 {
                     Id = post.Id,
@@ -95,7 +100,8 @@ namespace NB.EFCore.Repositories
                         Lastname = post.Author.Lastname,
                         PhoneNumber = post.Author.PhoneNumber,
                         Username = post.Author.Username,
-                        Password = post.Author.Password
+                        Password = post.Author.Password,
+                        Role = (UserRole) post.Author.Role
                     },
                     Category = new Category
                     {
@@ -104,7 +110,8 @@ namespace NB.EFCore.Repositories
                         Description = post.Category.Description,
                     },
                     Content = post.Content,
-                    Date = post.Date
+                    Date = post.Date,
+                    RequiredSubscription = (SubscriptionType) post.RequiredSubscription
                 });
         }
         

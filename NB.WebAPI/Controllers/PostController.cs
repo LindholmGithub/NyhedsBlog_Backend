@@ -79,10 +79,6 @@ namespace NB.WebAPI.Controllers
             {
                 return BadRequest(new Error_DTO(400, ae.Message));
             }
-            catch (Exception e)
-            {
-                return StatusCode(500, new Error_DTO(500,e.Message));
-            }
         }
 
         

@@ -15,9 +15,9 @@ namespace NB.EFCore.Entities
         public string Title { get; set; }
         public string Content { get; set; }
         public UserEntity Author { get; set; }
-        public int UserId { get; set; }
+        public int AuthorId { get; set; }
         
-        public SubscriptionType RequiredSubscription { get; set; }
+        public int RequiredSubscription { get; set; }
         public DateTime Date { get; set; }
     }
 }
