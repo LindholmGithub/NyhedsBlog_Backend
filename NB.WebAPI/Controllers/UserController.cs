@@ -1,32 +1,28 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NB.WebAPI.DTO;
-using NB.WebAPI.DTO.PostDTO;
+using NB.WebAPI.DTO.UserDTO;
 using NyhedsBlog_Backend.Core.IServices;
-using NyhedsBlog_Backend.Core.Models;
-using NyhedsBlog_Backend.Core.Models.Post;
 using NyhedsBlog_Backend.Core.Models.User;
 
 namespace NB.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IPostService _service;
+        private readonly IUserService _service;
 
-        public PostController(IPostService service)
+        public UserController(IUserService service)
         {
             _service = service;
         }
-        
+
         [HttpGet]
-        public ActionResult<IEnumerable<Post_DTO_Out>> GetAll()
+        public ActionResult<IEnumerable<User_DTO_Out>> GetAll()
         {
             try
             {
@@ -34,13 +30,11 @@ namespace NB.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, new Error_DTO(500, e.Message));
+                return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
             }
         }
-
-        
         [HttpGet("{id:int}")]
-        public ActionResult<Post_DTO_Out> GetById(int id)
+        public ActionResult<User_DTO_Out> GetById(int id)
         {
             try
             {
@@ -54,50 +48,45 @@ namespace NB.WebAPI.Controllers
             {
                 return NotFound(new Error_DTO(404, e.Message));
             }
-            catch (Exception e)
-            {
-                return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
-            }
         }
-
         
         [HttpPost]
-        public ActionResult<Post_DTO_Out> CreatePost([FromBody] Post_DTO_In data)
+        public ActionResult<User_DTO_Out> CreateCustomer([FromBody] User_DTO_In data)
         {
             try
             {
-                return Ok(Conversion(_service.CreatePost(new Post
+                return Ok(Conversion(_service.CreateUser(new User
                 {
-                    Title = data.Title,
-                    Author = new User{Id = data.AuthorId},
-                    Category = new Category{Id = data.CategoryId},
-                    Content = data.Content,
-                    Date = data.Date
+                    Firstname = data.Firstname,
+                    Lastname = data.Lastname,
+                    Email = data.Email,
+                    PhoneNumber = data.PhoneNumber,
+                    Username = data.Username,
+                    Password = data.Password,
+                    Role = (UserRole) data.Role
                 })));
             }
             catch (ArgumentException ae)
             {
                 return BadRequest(new Error_DTO(400, ae.Message));
             }
-            catch (Exception e)
-            {
-                return StatusCode(500, new Error_DTO(500,e.Message));
-            }
         }
-
         
         [HttpPut("{id:int}")]
-        public ActionResult<Post_DTO_Out> UpdatePost(int id, [FromBody] Post_DTO_In data)
+        public ActionResult<User_DTO_Out> UpdateCustomer(int id, User_DTO_In data)
         {
             try
             {
-                return Ok(Conversion(_service.UpdatePost(new Post{
+                return Ok(Conversion(_service.UpdateUser(new User
+                {
                     Id = id,
-                    Title = data.Title,
-                    Author = new User{Id = data.AuthorId},
-                    Category = new Category{Id = data.CategoryId},
-                    Content = data.Content,
-                    Date = data.Date
+                    Firstname = data.Firstname,
+                    Lastname = data.Lastname,
+                    Email = data.Email,
+                    PhoneNumber = data.PhoneNumber,
+                    Username = data.Username,
+                    Password = data.Password,
+                    Role = (UserRole) data.Role
                 })));
             }
             catch (ArgumentException ae)
@@ -109,14 +98,13 @@ namespace NB.WebAPI.Controllers
                 return StatusCode(500, new Error_DTO(500,e.Message));
             }
         }
-
         
         [HttpDelete("{id:int}")]
-        public ActionResult<Post_DTO_Out> DeletePost(int id)
+        public ActionResult<User_DTO_Out> Delete(int id)
         {
             try
             {
-                return Ok(Conversion(_service.DeletePost(new Post {Id = id})));
+                return Ok(Conversion(_service.DeleteUser(new User {Id = id})));
             }
             catch (ArgumentException ae)
             {
@@ -128,17 +116,25 @@ namespace NB.WebAPI.Controllers
             }
         }
         
-        //Conversion from Post to Post_DTO_Out
-        private Post_DTO_Out Conversion(Post p)
+        private User_DTO_Out Conversion(User u)
         {
-            return new Post_DTO_Out
+            int role = u.Role switch
             {
-                Id = p.Id,
-                Title = p.Title,
-                Category = p.Category,
-                Content = p.Content,
-                Author = p.Author,
-                Date = p.Date
+                UserRole.Administrator => 3,
+                UserRole.Moderator => 2,
+                _ => 1
+            }; 
+            
+            return new User_DTO_Out
+            {
+                Id = u.Id,
+                Firstname = u.Firstname,
+                Lastname = u.Lastname,
+                Email = u.Email,
+                PhoneNumber = u.PhoneNumber,
+                Username = u.Username,
+                Password = u.Password,
+                Role = role
             };
         }
     }

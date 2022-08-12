@@ -18,6 +18,7 @@ using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
 using NyhedsBlog_Backend.Core.Models.Subscription;
+using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
 using NyhedsBlog_Backend.Domain.Services;
 
@@ -81,6 +82,9 @@ namespace NB.WebAPI
 
             services.AddScoped<ICreateReadRepository<Category>, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddScoped<ICreateReadRepository<User>, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
