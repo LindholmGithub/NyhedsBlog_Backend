@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Linq;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
@@ -63,7 +64,16 @@ namespace NyhedsBlog_Backend.Domain.Services
         {
             return Validate(u) ? _repo.Update(u) : null;
         }
-        
+
+        public User Validate(string username, string password)
+        {
+            List<User> allUsers = GetAll();
+
+            var check = allUsers.Where(u => u.Username == username && u.Password == password).ToList();
+
+            return check.Any() ? check[0] : null;
+        }
+
         public bool Validate(User obj)
         {
             if (obj.Username.Length < UsernameMinimumLength)

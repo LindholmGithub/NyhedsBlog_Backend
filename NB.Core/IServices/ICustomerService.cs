@@ -10,5 +10,6 @@ namespace NyhedsBlog_Backend.Core.IServices
         public Customer CreateCustomer(Customer c);
         public Customer DeleteCustomer(Customer c);
         public Customer UpdateCustomer(Customer c);
+        public Customer Validate(string username, string password);
     }
 }

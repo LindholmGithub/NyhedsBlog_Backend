@@ -10,5 +10,7 @@ namespace NyhedsBlog_Backend.Core.IServices
         public User CreateUser(User u);
         public User DeleteUser(User u);
         public User UpdateUser(User u);
+
+        public User Validate(string username, string password);
     }
 }

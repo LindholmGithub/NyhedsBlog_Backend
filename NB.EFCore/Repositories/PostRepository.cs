@@ -29,6 +29,7 @@ namespace NB.EFCore.Repositories
                 Title = obj.Title,
                 AuthorId = obj.Author.Id,
                 CategoryId = obj.Category.Id,
+                FeaturedImageUrl = obj.FeaturedImageUrl,
                 Content = obj.Content,
                 Date = obj.Date,
                 RequiredSubscription = (int) obj.RequiredSubscription
@@ -46,6 +47,7 @@ namespace NB.EFCore.Repositories
                 Title = obj.Title,
                 AuthorId = obj.Author.Id,
                 CategoryId = obj.Category.Id,
+                FeaturedImageUrl = obj.FeaturedImageUrl,
                 Content = obj.Content,
                 Date = obj.Date,
                 RequiredSubscription = (int) obj.RequiredSubscription
@@ -109,6 +111,7 @@ namespace NB.EFCore.Repositories
                         Title = post.Category.Title,
                         Description = post.Category.Description,
                     },
+                    FeaturedImageUrl = post.FeaturedImageUrl,
                     Content = post.Content,
                     Date = post.Date,
                     RequiredSubscription = (SubscriptionType) post.RequiredSubscription

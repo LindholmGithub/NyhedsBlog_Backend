@@ -11,6 +11,8 @@ namespace NB.WebAPI.DTO.PostDTO
         
         public Category Category { get; set; }
         public string Title { get; set; }
+        
+        public string FeaturedImageUrl { get; set; }
         public string Content { get; set; }
         public User Author { get; set; }
         

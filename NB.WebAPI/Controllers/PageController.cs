@@ -59,7 +59,7 @@ namespace NB.WebAPI.Controllers
             }
         }
 
-        [HttpGet("/slug/{slug}")]
+        [HttpGet("slug/{slug}")]
         public ActionResult<Page_DTO_Out> GetBySlug(string slug)
         {
             try

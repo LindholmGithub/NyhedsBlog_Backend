@@ -71,6 +71,7 @@ namespace NB.WebAPI.Controllers
                     Title = data.Title,
                     Author = new User{Id = data.AuthorId},
                     Category = new Category{Id = data.CategoryId},
+                    FeaturedImageUrl = data.FeaturedImageUrl,
                     Content = data.Content,
                     Date = data.Date
                 })));
@@ -91,6 +92,7 @@ namespace NB.WebAPI.Controllers
                     Id = id,
                     Title = data.Title,
                     Author = new User{Id = data.AuthorId},
+                    FeaturedImageUrl = data.FeaturedImageUrl,
                     Category = new Category{Id = data.CategoryId},
                     Content = data.Content,
                     Date = data.Date
@@ -132,6 +134,7 @@ namespace NB.WebAPI.Controllers
                 Id = p.Id,
                 Title = p.Title,
                 Category = p.Category,
+                FeaturedImageUrl = p.FeaturedImageUrl,
                 Content = p.Content,
                 Author = p.Author,
                 Date = p.Date
