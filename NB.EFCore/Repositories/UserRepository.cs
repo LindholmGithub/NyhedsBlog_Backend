@@ -57,6 +57,7 @@ namespace NB.EFCore.Repositories
         public User Delete(User obj)
         {
             var entity = GetById(obj.Id);
+            _ctx.ChangeTracker.Clear();
             _ctx.Users.Remove(new UserEntity {Id = obj.Id});
             _ctx.SaveChanges();
 
@@ -83,21 +84,16 @@ namespace NB.EFCore.Repositories
         {
             return _ctx.Users
                 .AsEnumerable()
-                .Select(user =>
+                .Select(user => new User
                 {
-                    UserRole role = (UserRole) user.Role;
-
-                    return new User
-                    {
-                        Id = user.Id,
-                        Firstname = user.Firstname,
-                        Lastname = user.Lastname,
-                        Email = user.Email,
-                        PhoneNumber = user.PhoneNumber,
-                        Username = user.Username,
-                        Password = user.Password,
-                        Role = role
-                    };
+                    Id = user.Id,
+                    Firstname = user.Firstname,
+                    Lastname = user.Lastname,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Username = user.Username,
+                    Password = user.Password,
+                    Role = (UserRole) user.Role
                 });
         }
     }
