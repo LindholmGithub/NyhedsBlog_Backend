@@ -112,7 +112,7 @@ namespace NB.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, new Error_DTO(500,ApiStrings.InternalServerError));
+                return StatusCode(500, new Error_DTO(500,e.Message));
             }
         }
         
