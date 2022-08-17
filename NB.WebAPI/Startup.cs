@@ -80,7 +80,7 @@ namespace NB.WebAPI
             services.AddScoped<ICreateReadRepository<Post>,PostRepository>();
             services.AddScoped<IPostService, PostService>();
             
-            services.AddScoped<ICreateReadRepository<Page>,PageRepository>();
+            services.AddScoped<IPageRepository,PageRepository>();
             services.AddScoped<IPageService, PageService>();
 
             services.AddScoped<ICreateReadRepository<Category>, CategoryRepository>();
