@@ -58,7 +58,28 @@ namespace NB.WebAPI.Controllers
                 return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
             }
         }
-        
+
+        [HttpGet("/slug/{slug:string}")]
+        public ActionResult<Page_DTO_Out> GetBySlug(string slug)
+        {
+            try
+            {
+                return Ok(Conversion(_service.GetOneBySlug(slug)));
+            }
+            catch (InvalidDataException e)
+            {
+                return BadRequest(new Error_DTO(400, e.Message));
+            }
+            catch (FileNotFoundException e)
+            {
+                return NotFound(new Error_DTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
+            }
+        }
+
         [HttpPost]
         public ActionResult<Page_DTO_Out> CreatePage([FromBody] Page_DTO_In data)
         {

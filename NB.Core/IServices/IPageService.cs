@@ -6,6 +6,7 @@ namespace NyhedsBlog_Backend.Core.IServices
     public interface IPageService
     {
         public Page GetOneById(int id);
+        public Page GetOneBySlug(string slug);
         public List<Page> GetAll();
         public Page CreatePage(Page p);
         public Page DeletePage(Page p);

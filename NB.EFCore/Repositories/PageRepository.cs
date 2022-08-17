@@ -10,7 +10,7 @@ using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NB.EFCore.Repositories
 {
-    public class PageRepository : ICreateReadRepository<Page>
+    public class PageRepository : IPageRepository
     {
         private readonly NbContext _ctx;
 
@@ -76,6 +76,12 @@ namespace NB.EFCore.Repositories
         public IEnumerable<Page> Search(string term)
         {
             return Conversion().Where(page => page.Title == term).ToList();
+        }
+
+        public Page GetOneBySlug(string slug)
+        {
+            return Conversion().FirstOrDefault(post => post.PrettyDescriptor == slug) ??
+                   throw new FileNotFoundException(RepositoryStrings.IdNotFound);
         }
 
         private IQueryable<Page> Conversion()

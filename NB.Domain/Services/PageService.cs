@@ -19,9 +19,9 @@ namespace NyhedsBlog_Backend.Domain.Services
                            " characters, and under " + TitleMaximumLength + " characters.";
 
 
-        private readonly ICreateReadRepository<Page> _repo;
+        private readonly IPageRepository _repo;
 
-        public PageService(ICreateReadRepository<Page> repo)
+        public PageService(IPageRepository repo)
         {
             _repo = repo;
         }
@@ -34,6 +34,11 @@ namespace NyhedsBlog_Backend.Domain.Services
             }
             throw new InvalidDataException(DomainStrings.IdMustBeOverZero);
 
+        }
+
+        public Page GetOneBySlug(string slug)
+        {
+            return _repo.GetOneBySlug(slug);
         }
 
         public List<Page> GetAll()
