@@ -143,7 +143,6 @@ namespace NB.WebAPI.Controllers
             return new Category_DTO_Out
             {
                 Id = c.Id,
-                PrettyDescriptor = c.PrettyDescriptor,
                 Description = c.Description,
                 Title = c.Title,
                 PrettyDescriptor = c.PrettyDescriptor,

@@ -89,7 +89,6 @@ namespace NB.EFCore.Repositories
                 {
                     Id = cat.Id,
                     Description = cat.Description,
-                    PrettyDescriptor = cat.PrettyDescriptor,
                     Title = cat.Title,
                     PrettyDescriptor = cat.PrettyDescriptor,
                     Posts = cat.Posts.Select(p => new Post
