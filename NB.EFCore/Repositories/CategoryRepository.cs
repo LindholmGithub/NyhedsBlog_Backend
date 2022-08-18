@@ -4,6 +4,8 @@ using System.Linq;
 using NB.EFCore.Entities;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
+using NyhedsBlog_Backend.Core.Models.Subscription;
+using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NB.EFCore.Repositories
@@ -34,7 +36,11 @@ namespace NB.EFCore.Repositories
             {
                 Id = obj.Id,
                 Description = obj.Description,
-                Title = obj.Title
+                Title = obj.Title,
+                Posts = obj.Posts.Select(o => new PostEntity
+                {
+                    Id = o.Id
+                }).ToList()
             };
             _ctx.ChangeTracker.Clear();
             _ctx.Categories.Update(newEntity);
@@ -75,7 +81,33 @@ namespace NB.EFCore.Repositories
                 {
                     Id = cat.Id,
                     Description = cat.Description,
-                    Title = cat.Title
+                    Title = cat.Title,
+                    Posts = cat.Posts.Select(p => new Post
+                    {
+                        Id = p.Id,
+                        Title = p.Title,
+                        Content = p.Content,
+                        FeaturedImageUrl = p.FeaturedImageUrl,
+                        Date = p.Date,
+                        RequiredSubscription = (SubscriptionType) p.RequiredSubscription,
+                        Category = new Category
+                        {
+                            Id = p.Category.Id,
+                            Description = p.Category.Description,
+                            Title = p.Category.Title
+                        },
+                        Author = new User
+                        {
+                            Id = p.Author.Id,
+                            Firstname = p.Author.Firstname,
+                            Lastname = p.Author.Lastname,
+                            Email = p.Author.Email,
+                            Username = p.Author.Username,
+                            Password = p.Author.Password,
+                            PhoneNumber = p.Author.PhoneNumber,
+                            Role = (UserRole) p.Author.Role
+                        }
+                    }).ToList()
                 });
         }
     }

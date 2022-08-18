@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NB.WebAPI.DTO;
 using NB.WebAPI.DTO.PostDTO;
+using NB.WebAPI.DTO.UserDTO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
@@ -133,10 +134,20 @@ namespace NB.WebAPI.Controllers
             {
                 Id = p.Id,
                 Title = p.Title,
-                Category = p.Category,
+                CategoryId = p.Category.Id,
                 FeaturedImageUrl = p.FeaturedImageUrl,
                 Content = p.Content,
-                Author = p.Author,
+                Author = new User_DTO_Out
+                {
+                    Id = p.Author.Id,
+                    Firstname = p.Author.Firstname,
+                    Lastname = p.Author.Lastname,
+                    Email = p.Author.Email,
+                    Username = p.Author.Username,
+                    Password = p.Author.Password,
+                    PhoneNumber = p.Author.PhoneNumber,
+                    Role = (int) p.Author.Role
+                },
                 Date = p.Date
             };
         }
