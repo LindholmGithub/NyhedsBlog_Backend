@@ -24,7 +24,8 @@ namespace NB.EFCore.Repositories
             var newEntity = _ctx.Categories.Add(new CategoryEntity
             {
                 Title = obj.Title,
-                Description = obj.Description
+                Description = obj.Description,
+                PrettyDescriptor = obj.PrettyDescriptor,
             }).Entity;
             _ctx.SaveChanges();
             return GetById(newEntity.Id);
@@ -37,6 +38,7 @@ namespace NB.EFCore.Repositories
                 Id = obj.Id,
                 Description = obj.Description,
                 Title = obj.Title,
+                PrettyDescriptor = obj.PrettyDescriptor,
                 Posts = obj.Posts.Select(o => new PostEntity
                 {
                     Id = o.Id
@@ -101,6 +103,7 @@ namespace NB.EFCore.Repositories
                         {
                             Id = p.Category.Id,
                             Description = p.Category.Description,
+                            PrettyDescriptor = p.Category.PrettyDescriptor,
                             Title = p.Category.Title
                         },
                         Author = new User
