@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NB.WebAPI.DTO;
+using NB.WebAPI.DTO.CategoryDTO;
 using NB.WebAPI.DTO.PostDTO;
 using NB.WebAPI.DTO.UserDTO;
 using NyhedsBlog_Backend.Core.IServices;
@@ -134,7 +135,13 @@ namespace NB.WebAPI.Controllers
             {
                 Id = p.Id,
                 Title = p.Title,
-                CategoryId = p.Category.Id,
+                Category = new Category_DTO_Out
+                {
+                    Id = p.Category.Id,
+                    Title = p.Category.Title,
+                    Description = p.Category.Description,
+                    PrettyDescriptor = p.Category.PrettyDescriptor
+                },
                 FeaturedImageUrl = p.FeaturedImageUrl,
                 Content = p.Content,
                 Author = new User_DTO_Out

@@ -149,7 +149,13 @@ namespace NB.WebAPI.Controllers
                 Posts = c.Posts.Select(p => new Post_DTO_Out
                 {
                     Id = p.Id,
-                    CategoryId = p.Category.Id,
+                    Category = new Category_DTO_Out
+                    {
+                        Id = p.Category.Id,
+                        Title = p.Category.Title,
+                        Description = p.Category.Description,
+                        PrettyDescriptor = p.Category.PrettyDescriptor
+                    },
                     Title = p.Title,
                     Content = p.Content,
                     FeaturedImageUrl = p.FeaturedImageUrl,
