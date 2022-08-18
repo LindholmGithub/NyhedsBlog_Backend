@@ -33,6 +33,8 @@ namespace NB.EFCore.Repositories
 
         public Category Update(Category obj)
         {
+            var old = GetById(obj.Id);
+            obj.Posts = old.Posts;
             var newEntity = new CategoryEntity
             {
                 Id = obj.Id,

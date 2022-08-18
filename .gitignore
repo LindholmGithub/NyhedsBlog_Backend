@@ -61,3 +61,4 @@ NB.Core/obj/NB.Core.csproj.nuget.g.props
 NB.Core/obj/NB.Core.csproj.nuget.dgspec.json
 NB.Core/obj/Debug/net5.0/NB.Core.GeneratedMSBuildEditorConfig.editorconfig
 NB.Core/obj/Debug/net5.0/NB.Core.assets.cache
+NB.WebAPI/appDb.db
