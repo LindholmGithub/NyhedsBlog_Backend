@@ -84,7 +84,8 @@ namespace NB.WebAPI.Controllers
                 return Ok(Conversion(_service.CreateCategory(new Category
                 {
                     Title = data.Title,
-                    Description = data.Description
+                    Description = data.Description,
+                    PrettyDescriptor = data.PrettyDescriptor,
                 })));
             }
             catch (ArgumentException ae)
@@ -106,7 +107,8 @@ namespace NB.WebAPI.Controllers
                 {
                     Id = id,
                     Title = data.Title,
-                    Description = data.Description
+                    Description = data.Description,
+                    PrettyDescriptor = data.PrettyDescriptor,
                 })));
             }
             catch (ArgumentException ae)
@@ -144,6 +146,7 @@ namespace NB.WebAPI.Controllers
                 PrettyDescriptor = c.PrettyDescriptor,
                 Description = c.Description,
                 Title = c.Title,
+                PrettyDescriptor = c.PrettyDescriptor,
                 Posts = c.Posts.Select(p => new Post_DTO_Out
                 {
                     Id = p.Id,

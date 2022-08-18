@@ -13,6 +13,8 @@ namespace NB.WebAPI.DTO.CategoryDTO
         
         public string Description { get; set; }
         
+        public string PrettyDescriptor { get; set; }
+
         public List<Post_DTO_Out> Posts { get; set; }
     }
 }

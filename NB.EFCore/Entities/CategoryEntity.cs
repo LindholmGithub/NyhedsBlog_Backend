@@ -8,7 +8,8 @@ namespace NB.EFCore.Entities
         public string PrettyDescriptor { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        
+        public string PrettyDescriptor { get; set; }
+
         public List<PostEntity> Posts { get; set; }
     }
 }
