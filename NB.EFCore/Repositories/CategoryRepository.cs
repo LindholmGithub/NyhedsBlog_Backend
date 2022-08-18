@@ -10,7 +10,7 @@ using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NB.EFCore.Repositories
 {
-    public class CategoryRepository : ICreateReadRepository<Category>
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly NbContext _ctx;
         
@@ -74,6 +74,12 @@ namespace NB.EFCore.Repositories
             return Conversion().Where(cat => cat.Title == term).ToList();
         }
 
+        public Category GetOneBySlug(string slug)
+        {
+            return Conversion().FirstOrDefault(cat => cat.PrettyDescriptor == slug) ??
+                   throw new FileNotFoundException(RepositoryStrings.IdNotFound);
+        }
+
         private IQueryable<Category> Conversion()
         {
             return _ctx.Categories
@@ -82,6 +88,7 @@ namespace NB.EFCore.Repositories
                     Id = cat.Id,
                     Description = cat.Description,
                     Title = cat.Title,
+                    PrettyDescriptor = cat.PrettyDescriptor,
                     Posts = cat.Posts.Select(p => new Post
                     {
                         Id = p.Id,

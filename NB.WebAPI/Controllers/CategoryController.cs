@@ -54,6 +54,27 @@ namespace NB.WebAPI.Controllers
                 return NotFound(new Error_DTO(404, e.Message));
             }
         }
+        
+        [HttpGet("slug/{slug}")]
+        public ActionResult<Category_DTO_Out> GetBySlug(string slug)
+        {
+            try
+            {
+                return Ok(Conversion(_service.GetOneBySlug(slug)));
+            }
+            catch (InvalidDataException e)
+            {
+                return BadRequest(new Error_DTO(400, e.Message));
+            }
+            catch (FileNotFoundException e)
+            {
+                return NotFound(new Error_DTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
+            }
+        }
 
         [HttpPost]
         public ActionResult<Category_DTO_Out> CreateCategory([FromBody] Category_DTO_In data)
@@ -120,6 +141,7 @@ namespace NB.WebAPI.Controllers
             return new Category_DTO_Out
             {
                 Id = c.Id,
+                PrettyDescriptor = c.PrettyDescriptor,
                 Description = c.Description,
                 Title = c.Title,
                 Posts = c.Posts.Select(p => new Post_DTO_Out

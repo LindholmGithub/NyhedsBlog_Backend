@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NB.WebAPI.DTO;
+using NB.WebAPI.DTO.AuthDTO;
 using NB.WebAPI.DTO.CustomerDTO;
 using NB.WebAPI.DTO.SubscriptionDTO;
 using NyhedsBlog_Backend.Core.IServices;
@@ -55,11 +56,11 @@ namespace NB.WebAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Customer_DTO_Out> CreateCustomer([FromBody] Customer_DTO_In data)
+        public ActionResult<Customer_DTO_Out> CreateCustomer([FromForm] Customer_DTO_In data)
         {
             try
             {
-                return Ok(Conversion(_service.CreateCustomer(new Customer
+                var CreatedCustomer = Conversion(_service.CreateCustomer(new Customer
                 {
                     Firstname = data.Firstname,
                     Lastname = data.Lastname,
@@ -67,7 +68,25 @@ namespace NB.WebAPI.Controllers
                     PhoneNumber = data.PhoneNumber,
                     Username = data.Username,
                     Password = data.Password,
-                })));
+                }));
+
+                if (data.Redirect is {Length: > 0})
+                {
+                    var base64string =
+                        System.Convert.ToBase64String(
+                            System.Text.Encoding.UTF8.GetBytes(CreatedCustomer.Username + ":" + CreatedCustomer.Password));
+                    
+                    var newObject = new Auth_DTO_In
+                    {
+                        Username = CreatedCustomer.Username,
+                        Password = CreatedCustomer.Password,
+                        Redirect = data.Redirect
+                    };
+
+                    return Redirect(data.Redirect + "?status=200&userid="+CreatedCustomer.Id+"&message="+base64string);
+                }
+                
+                return Ok(CreatedCustomer);
             }
             catch (ArgumentException ae)
             {

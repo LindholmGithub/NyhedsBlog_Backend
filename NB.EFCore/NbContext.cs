@@ -66,16 +66,26 @@ namespace NB.EFCore
                     SubscriptionId = 1
                 });
 
+            var numberOfCategories = 10;
+            List<CategoryEntity> generatedCategories = new List<CategoryEntity>();
+
+            for (int i = 1; i <= numberOfCategories; i++)
+            {
+                generatedCategories.Add(new CategoryEntity
+                {
+                    Id = i,
+                    Title = "Kategori " + i,
+                    Description = "Tester med seedet data",
+                    PrettyDescriptor = "kategori-" + i
+                });
+            }
+
             modelBuilder.Entity<CategoryEntity>()
-                .HasData(new CategoryEntity {Id = 1, Title = "Kategori 1", Description = "Test"},
-                    new CategoryEntity { Id = 2, Title = "Kategori 2", Description = "Test" },
-                    new CategoryEntity { Id = 3, Title = "Kategori 3", Description = "Test" },
-                    new CategoryEntity { Id = 4, Title = "Kategori 4", Description = "Test" },
-                    new CategoryEntity { Id = 5, Title = "Kategori 5", Description = "Test" });
+                .HasData(generatedCategories);
 
             List<PostEntity> generatedPosts = new List<PostEntity>();
             var nextId = 1;
-            for (int i = 1; i <= 5; i++)
+            for (int i = 1; i <= numberOfCategories; i++)
             {
                 for (int x = 1; x <= 12; x++)
                 {
@@ -85,10 +95,10 @@ namespace NB.EFCore
                         AuthorId = 1,
                         CategoryId = i,
                         Title = "Post " + x + " in Categori " + i,
-                        Content = "Lorem ipsum dolor sit amet",
+                        Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu.",
                         RequiredSubscription = 0,
                         Date = DateTime.Now,
-                        FeaturedImageUrl = "https://variety.com/wp-content/uploads/2021/07/Rick-Astley-Never-Gonna-Give-You-Up.png"
+                        FeaturedImageUrl = "https://picsum.photos/800/300"
                     });
                     nextId++;
                 }

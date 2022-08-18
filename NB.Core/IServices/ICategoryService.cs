@@ -6,6 +6,7 @@ namespace NyhedsBlog_Backend.Core.IServices
     public interface ICategoryService
     {
         public Category GetOneById(int id);
+        public Category GetOneBySlug(string slug);
         public List<Category> GetAll();
         public Category CreateCategory(Category c);
         public Category DeleteCategory(Category c);
