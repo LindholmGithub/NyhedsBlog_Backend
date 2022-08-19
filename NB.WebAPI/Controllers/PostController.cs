@@ -12,6 +12,7 @@ using NB.WebAPI.DTO.UserDTO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
+using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 
 namespace NB.WebAPI.Controllers
@@ -75,6 +76,7 @@ namespace NB.WebAPI.Controllers
                     Category = new Category{Id = data.CategoryId},
                     FeaturedImageUrl = data.FeaturedImageUrl,
                     Content = data.Content,
+                    RequiredSubscription = (SubscriptionType) data.RequiredSubscription,
                     Date = data.Date
                 })));
             }
@@ -97,6 +99,7 @@ namespace NB.WebAPI.Controllers
                     FeaturedImageUrl = data.FeaturedImageUrl,
                     Category = new Category{Id = data.CategoryId},
                     Content = data.Content,
+                    RequiredSubscription = (SubscriptionType) data.RequiredSubscription,
                     Date = data.Date
                 })));
             }
@@ -131,6 +134,13 @@ namespace NB.WebAPI.Controllers
         //Conversion from Post to Post_DTO_Out
         private Post_DTO_Out Conversion(Post p)
         {
+            int subType = p.RequiredSubscription switch
+            {
+                SubscriptionType.Full => 3,
+                SubscriptionType.Trial => 2,
+                _ => 1
+            };
+            
             return new Post_DTO_Out
             {
                 Id = p.Id,
@@ -155,6 +165,7 @@ namespace NB.WebAPI.Controllers
                     PhoneNumber = p.Author.PhoneNumber,
                     Role = (int) p.Author.Role
                 },
+                RequiredSubscription = subType,
                 Date = p.Date
             };
         }

@@ -14,7 +14,7 @@ namespace NB.WebAPI.DTO.PostDTO
         public string Content { get; set; }
         public int AuthorId { get; set; }
         
-        public SubscriptionType RequiredSubscription { get; set; }
+        public int RequiredSubscription { get; set; }
         public DateTime Date { get; set; }
     }
 }

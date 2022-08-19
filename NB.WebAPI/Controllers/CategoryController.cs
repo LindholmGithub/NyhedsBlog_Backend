@@ -11,6 +11,7 @@ using NB.WebAPI.DTO.PostDTO;
 using NB.WebAPI.DTO.UserDTO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models.Post;
+using NyhedsBlog_Backend.Core.Models.Subscription;
 
 namespace NB.WebAPI.Controllers
 {
@@ -160,7 +161,7 @@ namespace NB.WebAPI.Controllers
                     Content = p.Content,
                     FeaturedImageUrl = p.FeaturedImageUrl,
                     Date = p.Date,
-                    RequiredSubscription = p.RequiredSubscription,
+                    RequiredSubscription = (int) p.RequiredSubscription,
                     Author = new User_DTO_Out
                     {
                         Id = p.Author.Id,
