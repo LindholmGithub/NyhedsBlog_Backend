@@ -158,7 +158,6 @@ namespace NB.WebAPI.Controllers
                 Email = c.Email,
                 PhoneNumber = c.PhoneNumber,
                 Username = c.Username,
-                Password = c.Password,
                 Subscription = new Subscription_DTO_Out
                 {
                     DateFrom = c.Subscription.DateFrom,

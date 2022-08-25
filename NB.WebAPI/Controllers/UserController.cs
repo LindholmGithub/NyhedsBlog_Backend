@@ -85,7 +85,6 @@ namespace NB.WebAPI.Controllers
                     Email = data.Email,
                     PhoneNumber = data.PhoneNumber,
                     Username = data.Username,
-                    Password = data.Password,
                     Role = (UserRole) data.Role
                 })));
             }
