@@ -78,12 +78,11 @@ namespace NB.WebAPI.Controllers
                 {
                     var base64string =
                         System.Convert.ToBase64String(
-                            System.Text.Encoding.UTF8.GetBytes(CreatedCustomer.Username + ":" + CreatedCustomer.Password));
+                            System.Text.Encoding.UTF8.GetBytes(CreatedCustomer.Username + ":" + data.Password));
                     
                     var newObject = new Auth_DTO_In
                     {
                         Username = CreatedCustomer.Username,
-                        Password = CreatedCustomer.Password,
                         Redirect = data.Redirect
                     };
 

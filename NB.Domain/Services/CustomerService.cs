@@ -90,7 +90,10 @@ namespace NyhedsBlog_Backend.Domain.Services
 
             var check = allUsers.Where(u => u.Username == username && u.Password == password).ToList();
 
-            return check.Any() ? check[0] : null;
+            if (check.Any())
+                return check[0];
+
+            throw new InvalidDataException(InvalidLogin);
         }
 
         public bool Validate(Customer obj)

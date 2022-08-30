@@ -169,7 +169,6 @@ namespace NB.WebAPI.Controllers
                         Lastname = p.Author.Lastname,
                         Email = p.Author.Email,
                         Username = p.Author.Username,
-                        Password = p.Author.Password,
                         PhoneNumber = p.Author.PhoneNumber,
                         Role = (int) p.Author.Role
                     }

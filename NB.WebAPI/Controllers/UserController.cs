@@ -132,7 +132,6 @@ namespace NB.WebAPI.Controllers
                 Email = u.Email,
                 PhoneNumber = u.PhoneNumber,
                 Username = u.Username,
-                Password = u.Password,
                 Role = role
             };
         }

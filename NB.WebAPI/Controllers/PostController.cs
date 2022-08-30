@@ -9,6 +9,7 @@ using NB.WebAPI.DTO;
 using NB.WebAPI.DTO.CategoryDTO;
 using NB.WebAPI.DTO.PostDTO;
 using NB.WebAPI.DTO.UserDTO;
+using NB.WebAPI.Util;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
@@ -21,11 +22,17 @@ namespace NB.WebAPI.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
+        private int CHARACTERS_FOR_UNAUTHORIZED = 100;
+        
         private readonly IPostService _service;
+        private readonly ICustomerService _customerService;
+        private readonly BasicAuthenticationReader _authenticationReader;
 
-        public PostController(IPostService service)
+        public PostController(IPostService service, ICustomerService customerService)
         {
             _service = service;
+            _customerService = customerService;
+            _authenticationReader = new BasicAuthenticationReader();
         }
         
         [HttpGet]
@@ -33,7 +40,7 @@ namespace NB.WebAPI.Controllers
         {
             try
             {
-                return Ok(_service.GetAll().Select(Conversion));
+                return Ok(_service.GetAll().Select(Conversion_Unauthorized));
             }
             catch (Exception e)
             {
@@ -47,7 +54,22 @@ namespace NB.WebAPI.Controllers
         {
             try
             {
-                return Ok(Conversion(_service.GetOneById(id)));
+                var username = _authenticationReader.GetUsername(HttpContext);
+                var password = _authenticationReader.GetPassword(HttpContext);
+
+                Post toReturn = _service.GetOneById(id);
+                try
+                {
+                    var selectedUser = _customerService.Validate(username, password);
+                    if (selectedUser.Subscription.Type >= toReturn.RequiredSubscription)
+                        return Ok(Conversion(toReturn));
+                }
+                catch (InvalidDataException e)
+                {
+                    return Ok(Conversion_Unauthorized(toReturn));
+                }
+                
+                return Ok(Conversion_Unauthorized(toReturn));
             }
             catch (InvalidDataException e)
             {
@@ -161,10 +183,48 @@ namespace NB.WebAPI.Controllers
                     Lastname = p.Author.Lastname,
                     Email = p.Author.Email,
                     Username = p.Author.Username,
-                    Password = p.Author.Password,
                     PhoneNumber = p.Author.PhoneNumber,
                     Role = (int) p.Author.Role
                 },
+                Authorized = true,
+                RequiredSubscription = subType,
+                Date = p.Date
+            };
+        }
+        
+        private Post_DTO_Out Conversion_Unauthorized(Post p)
+        {
+            int subType = p.RequiredSubscription switch
+            {
+                SubscriptionType.Full => 3,
+                SubscriptionType.Trial => 2,
+                _ => 1
+            };
+            
+            return new Post_DTO_Out
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Category = new Category_DTO_Out
+                {
+                    Id = p.Category.Id,
+                    Title = p.Category.Title,
+                    Description = p.Category.Description,
+                    PrettyDescriptor = p.Category.PrettyDescriptor
+                },
+                FeaturedImageUrl = p.FeaturedImageUrl,
+                Content = p.Content[..CHARACTERS_FOR_UNAUTHORIZED],
+                Author = new User_DTO_Out
+                {
+                    Id = p.Author.Id,
+                    Firstname = p.Author.Firstname,
+                    Lastname = p.Author.Lastname,
+                    Email = p.Author.Email,
+                    Username = p.Author.Username,
+                    PhoneNumber = p.Author.PhoneNumber,
+                    Role = (int) p.Author.Role
+                },
+                Authorized = false,
                 RequiredSubscription = subType,
                 Date = p.Date
             };
