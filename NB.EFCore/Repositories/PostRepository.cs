@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -70,8 +71,12 @@ namespace NB.EFCore.Repositories
 
         public Post GetById(int id)
         {
-            return Conversion().FirstOrDefault(post => post.Id == id) ??
+            
+            var unit = Conversion().FirstOrDefault(post => post.Id == id) ??
                    throw new FileNotFoundException(RepositoryStrings.IdNotFound);
+            Console.WriteLine(unit.RequiredSubscription);
+
+            return unit;
         }
 
         public IEnumerable<Post> GetAll()
@@ -87,7 +92,7 @@ namespace NB.EFCore.Repositories
         private IQueryable<Post> Conversion()
         {
             
-            return _ctx.Posts
+            var posts = _ctx.Posts
                 .Include(entity => entity.Author)
                 .Include(entity => entity.Category)
                 .Select(post => new Post()
@@ -114,8 +119,9 @@ namespace NB.EFCore.Repositories
                     FeaturedImageUrl = post.FeaturedImageUrl,
                     Content = post.Content,
                     Date = post.Date,
-                    RequiredSubscription = (SubscriptionType) post.RequiredSubscription
+                    RequiredSubscription = (SubscriptionType)post.RequiredSubscription
                 });
+            return posts;
         }
         
     }

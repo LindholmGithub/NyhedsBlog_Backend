@@ -156,12 +156,6 @@ namespace NB.WebAPI.Controllers
         //Conversion from Post to Post_DTO_Out
         private Post_DTO_Out Conversion(Post p)
         {
-            int subType = p.RequiredSubscription switch
-            {
-                SubscriptionType.Full => 3,
-                SubscriptionType.Trial => 2,
-                _ => 1
-            };
             
             return new Post_DTO_Out
             {
@@ -187,19 +181,13 @@ namespace NB.WebAPI.Controllers
                     Role = (int) p.Author.Role
                 },
                 Authorized = true,
-                RequiredSubscription = subType,
+                RequiredSubscription = (int)p.RequiredSubscription,
                 Date = p.Date
             };
         }
         
         private Post_DTO_Out Conversion_Unauthorized(Post p)
         {
-            int subType = p.RequiredSubscription switch
-            {
-                SubscriptionType.Full => 3,
-                SubscriptionType.Trial => 2,
-                _ => 1
-            };
             
             return new Post_DTO_Out
             {
@@ -213,7 +201,7 @@ namespace NB.WebAPI.Controllers
                     PrettyDescriptor = p.Category.PrettyDescriptor
                 },
                 FeaturedImageUrl = p.FeaturedImageUrl,
-                Content = p.Content[..CHARACTERS_FOR_UNAUTHORIZED],
+                Content = p.Content[..CHARACTERS_FOR_UNAUTHORIZED] + "...",
                 Author = new User_DTO_Out
                 {
                     Id = p.Author.Id,
@@ -225,7 +213,7 @@ namespace NB.WebAPI.Controllers
                     Role = (int) p.Author.Role
                 },
                 Authorized = false,
-                RequiredSubscription = subType,
+                RequiredSubscription = (int)p.RequiredSubscription,
                 Date = p.Date
             };
         }

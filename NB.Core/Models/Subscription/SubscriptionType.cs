@@ -2,8 +2,8 @@
 {
     public enum SubscriptionType
     {
-        None = 1,
-        Trial = 2,
-        Full = 3
+        None = 0,
+        Trial = 1,
+        Full = 2
     }
 }
