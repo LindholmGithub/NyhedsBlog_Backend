@@ -53,20 +53,70 @@ namespace NB.EFCore
                     DateTo = DateTime.MaxValue
                 });
 
+            modelBuilder.Entity<SubscriptionEntity>()
+                .HasData(new SubscriptionEntity
+                {
+                    Id = 2,
+                    Type = 1,
+                    DateFrom = DateTime.MinValue,
+                    DateTo = DateTime.MaxValue
+                });
+            
+            modelBuilder.Entity<SubscriptionEntity>()
+                .HasData(new SubscriptionEntity
+                {
+                    Id = 3,
+                    Type = 2,
+                    DateFrom = DateTime.MinValue,
+                    DateTo = DateTime.MaxValue
+                });
+            
             modelBuilder.Entity<CustomerEntity>()
                 .HasData(new CustomerEntity
                 {
                     Id = 1,
                     Firstname = "Ole",
                     Lastname = "Bobbysen",
-                    Address = "Lindholms Mors Gade 69",
+                    Address = "Harbys Mors Gade 69",
                     Zipcode = 6969,
                     City = "Yeahboi",
-                    Email = "test@test.com",
-                    Username = "test@test.com",
+                    Email = "test1@test.com",
+                    Username = "test1@test.com",
                     Password = "test1234",
                     PhoneNumber = 42042069,
                     SubscriptionId = 1
+                });
+            
+            modelBuilder.Entity<CustomerEntity>()
+                .HasData(new CustomerEntity
+                {
+                    Id = 2,
+                    Firstname = "Ole",
+                    Lastname = "Bobbysen",
+                    Address = "Harbys Mors Gade 69",
+                    Zipcode = 6969,
+                    City = "Yeahboi",
+                    Email = "test2@test.com",
+                    Username = "test2@test.com",
+                    Password = "test1234",
+                    PhoneNumber = 42042069,
+                    SubscriptionId = 2
+                });
+            
+            modelBuilder.Entity<CustomerEntity>()
+                .HasData(new CustomerEntity
+                {
+                    Id = 3,
+                    Firstname = "Ole",
+                    Lastname = "Bobbysen",
+                    Address = "Harbys Mors Gade 69",
+                    Zipcode = 6969,
+                    City = "Yeahboi",
+                    Email = "test3@test.com",
+                    Username = "test3@test.com",
+                    Password = "test1234",
+                    PhoneNumber = 42042069,
+                    SubscriptionId = 3
                 });
 
             var numberOfCategories = 10;
