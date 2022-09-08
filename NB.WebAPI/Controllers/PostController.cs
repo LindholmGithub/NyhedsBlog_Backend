@@ -22,7 +22,7 @@ namespace NB.WebAPI.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private int CHARACTERS_FOR_UNAUTHORIZED = 100;
+        private int CHARACTERS_FOR_UNAUTHORIZED = 425;
         
         private readonly IPostService _service;
         private readonly ICustomerService _customerService;
