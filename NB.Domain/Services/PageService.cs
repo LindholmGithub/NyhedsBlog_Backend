@@ -15,8 +15,8 @@ namespace NyhedsBlog_Backend.Domain.Services
 
         //Custom Length Errors
         private readonly string
-            InvalidTitle = DomainStrings.InvalidData + " Title length must be over " + TitleMinimumLength +
-                           " characters, and under " + TitleMaximumLength + " characters.";
+            InvalidTitle = DomainStrings.InvalidData + " Overskrifts længde skal være over " + TitleMinimumLength +
+                           " tegn, og under " + TitleMaximumLength + " tegn.";
 
 
         private readonly IPageRepository _repo;

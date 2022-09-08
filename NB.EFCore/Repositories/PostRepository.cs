@@ -13,7 +13,7 @@ using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NB.EFCore.Repositories
 {
-    public class PostRepository : ICreateReadRepository<Post>
+    public class PostRepository : IPostRepository
     {
         
         private readonly NbContext _ctx;
@@ -30,9 +30,10 @@ namespace NB.EFCore.Repositories
                 Title = obj.Title,
                 AuthorId = obj.Author.Id,
                 CategoryId = obj.Category.Id,
+                PrettyDescriptor = obj.PrettyDescriptor,
                 FeaturedImageUrl = obj.FeaturedImageUrl,
                 Content = obj.Content,
-                Date = obj.Date,
+                Date = DateTime.Now,
                 RequiredSubscription = (int) obj.RequiredSubscription
             }).Entity;
             _ctx.SaveChanges();
@@ -48,9 +49,10 @@ namespace NB.EFCore.Repositories
                 Title = obj.Title,
                 AuthorId = obj.Author.Id,
                 CategoryId = obj.Category.Id,
+                PrettyDescriptor = obj.PrettyDescriptor,
                 FeaturedImageUrl = obj.FeaturedImageUrl,
                 Content = obj.Content,
-                Date = obj.Date,
+                Date = DateTime.Now,
                 RequiredSubscription = (int) obj.RequiredSubscription
             };
             _ctx.ChangeTracker.Clear();
@@ -88,7 +90,14 @@ namespace NB.EFCore.Repositories
         {
             return Conversion().Where(post => post.Title == term).ToList();
         }
-        
+
+        public Post GetOneBySlug(string slug)
+        {
+            var unit = Conversion().FirstOrDefault(post => post.PrettyDescriptor == slug) ??
+                   throw new FileNotFoundException(RepositoryStrings.IdNotFound);
+            return unit;
+        }
+
         private IQueryable<Post> Conversion()
         {
             
@@ -116,6 +125,7 @@ namespace NB.EFCore.Repositories
                         Title = post.Category.Title,
                         Description = post.Category.Description,
                     },
+                    PrettyDescriptor = post.PrettyDescriptor,
                     FeaturedImageUrl = post.FeaturedImageUrl,
                     Content = post.Content,
                     Date = post.Date,

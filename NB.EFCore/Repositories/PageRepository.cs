@@ -80,7 +80,7 @@ namespace NB.EFCore.Repositories
 
         public Page GetOneBySlug(string slug)
         {
-            return Conversion().FirstOrDefault(post => post.PrettyDescriptor == slug) ??
+            return Conversion().FirstOrDefault(page => page.PrettyDescriptor == slug) ??
                    throw new FileNotFoundException(RepositoryStrings.IdNotFound);
         }
 

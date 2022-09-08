@@ -85,6 +85,26 @@ namespace NB.WebAPI.Controllers
             }
         }
 
+        [HttpGet("slug/{slug}")]
+        public ActionResult<Post_DTO_Out> GetBySlug(string slug)
+        {
+            try
+            {
+                return Ok(Conversion(_service.GetOneBySlug(slug)));
+            }
+            catch (InvalidDataException e)
+            {
+                return BadRequest(new Error_DTO(400, e.Message));
+            }
+            catch (FileNotFoundException e)
+            {
+                return NotFound(new Error_DTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
+            }
+        }
         
         [HttpPost]
         public ActionResult<Post_DTO_Out> CreatePost([FromBody] Post_DTO_In data)
@@ -95,6 +115,7 @@ namespace NB.WebAPI.Controllers
                 {
                     Title = data.Title,
                     Author = new User{Id = data.AuthorId},
+                    PrettyDescriptor = data.PrettyDescriptor,
                     Category = new Category{Id = data.CategoryId},
                     FeaturedImageUrl = data.FeaturedImageUrl,
                     Content = data.Content,
@@ -118,6 +139,7 @@ namespace NB.WebAPI.Controllers
                     Id = id,
                     Title = data.Title,
                     Author = new User{Id = data.AuthorId},
+                    PrettyDescriptor = data.PrettyDescriptor,
                     FeaturedImageUrl = data.FeaturedImageUrl,
                     Category = new Category{Id = data.CategoryId},
                     Content = data.Content,
@@ -168,6 +190,7 @@ namespace NB.WebAPI.Controllers
                     Description = p.Category.Description,
                     PrettyDescriptor = p.Category.PrettyDescriptor
                 },
+                PrettyDescriptor = p.PrettyDescriptor,
                 FeaturedImageUrl = p.FeaturedImageUrl,
                 Content = p.Content,
                 Author = new User_DTO_Out
@@ -200,6 +223,7 @@ namespace NB.WebAPI.Controllers
                     Description = p.Category.Description,
                     PrettyDescriptor = p.Category.PrettyDescriptor
                 },
+                PrettyDescriptor = p.PrettyDescriptor,
                 FeaturedImageUrl = p.FeaturedImageUrl,
                 Content = p.Content[..CHARACTERS_FOR_UNAUTHORIZED] + "...",
                 Author = new User_DTO_Out

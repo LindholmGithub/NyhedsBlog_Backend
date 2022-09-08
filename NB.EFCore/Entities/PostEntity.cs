@@ -13,7 +13,8 @@ namespace NB.EFCore.Entities
         
         public int CategoryId { get; set; }
         public string Title { get; set; }
-        
+        public string PrettyDescriptor { get; set; }
+
         public string FeaturedImageUrl { get; set; }
         public string Content { get; set; }
         public UserEntity Author { get; set; }

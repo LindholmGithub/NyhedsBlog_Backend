@@ -11,12 +11,18 @@ namespace NyhedsBlog_Backend.Domain.Services
         //Custom Length Constraints
         private const int
             TitleMinimumLength = 10,
-            TitleMaximumLength = 60;
+            TitleMaximumLength = 60,
+            UrlMinimumLength = 3,
+            UrlMaximumLength = 20;
 
         //Custom Length Errors
         private readonly string
-            InvalidTitle = DomainStrings.InvalidData + " Title length must be over " + TitleMinimumLength +
-                           " characters, and under " + TitleMaximumLength + " characters.";
+            InvalidTitle = DomainStrings.InvalidData + " Overskrifts længde skal være over " + TitleMinimumLength +
+                           " bogstaver, og under " + TitleMaximumLength + " bogstaver.";
+        
+        private readonly string
+            InvalidUrl = DomainStrings.InvalidData + " URL længden skal være over " + UrlMinimumLength +
+                           " bogstaver, og under " + UrlMaximumLength + " bogstaver.";
 
         
         private readonly ICategoryRepository _repo;
@@ -71,6 +77,12 @@ namespace NyhedsBlog_Backend.Domain.Services
             
             if (obj.Title.Length > TitleMaximumLength)
                 throw new InvalidDataException(InvalidTitle);
+
+            if (obj.PrettyDescriptor.Length < UrlMinimumLength)
+                throw new InvalidDataException(InvalidUrl);
+            
+            if (obj.PrettyDescriptor.Length < UrlMaximumLength)
+                throw new InvalidDataException(InvalidUrl);
 
             return true;
         }

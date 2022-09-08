@@ -77,7 +77,7 @@ namespace NB.WebAPI
             services.AddScoped<ICreateReadRepository<Subscription>, SubscriptionRepository>();
             services.AddScoped<ISubscriptionService, SubscriptionService>();
             
-            services.AddScoped<ICreateReadRepository<Post>,PostRepository>();
+            services.AddScoped<IPostRepository,PostRepository>();
             services.AddScoped<IPostService, PostService>();
             
             services.AddScoped<IPageRepository,PageRepository>();

@@ -159,6 +159,7 @@ namespace NB.WebAPI.Controllers
                     },
                     Title = p.Title,
                     Content = p.Content,
+                    PrettyDescriptor = p.PrettyDescriptor,
                     FeaturedImageUrl = p.FeaturedImageUrl,
                     Date = p.Date,
                     RequiredSubscription = (int) p.RequiredSubscription,

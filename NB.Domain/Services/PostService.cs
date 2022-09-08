@@ -14,17 +14,22 @@ namespace NyhedsBlog_Backend.Domain.Services
         //Custom Length Constraints
         private const int
             TitleMinimumLength = 10,
-            TitleMaximumLength = 60;
+            TitleMaximumLength = 60,
+            ContentMinimumLength = 400;
 
         //Custom Length Errors
         private readonly string
-            InvalidTitle = DomainStrings.InvalidData + " Title length must be over " + TitleMinimumLength +
-                           " characters, and under " + TitleMaximumLength + " characters.";
+            InvalidTitle = DomainStrings.InvalidData + " Overskrifts længde skal være over " + TitleMinimumLength +
+                           " tegn, og under " + TitleMaximumLength + " tegn.";
+        
+        private readonly string
+            InvalidContent = DomainStrings.InvalidData + " Indholdets længde skal være over " + ContentMinimumLength +
+                           " tegn.";
 
 
-        private readonly ICreateReadRepository<Post> _repo;
+        private readonly IPostRepository _repo;
 
-        public PostService(ICreateReadRepository<Post> repo)
+        public PostService(IPostRepository repo)
         {
             _repo = repo;
         }
@@ -42,6 +47,11 @@ namespace NyhedsBlog_Backend.Domain.Services
         public List<Post> GetAll()
         {
             return _repo.GetAll() as List<Post>;
+        }
+
+        public Post GetOneBySlug(string slug)
+        {
+            return _repo.GetOneBySlug(slug);
         }
 
         public Post CreatePost(Post p)
@@ -71,6 +81,9 @@ namespace NyhedsBlog_Backend.Domain.Services
             if (obj.Title.Length > TitleMaximumLength)
                 throw new InvalidDataException(InvalidTitle);
 
+            if (obj.Content.Length < ContentMinimumLength)
+                throw new InvalidDataException(InvalidContent);
+            
             return true;
         }
     }

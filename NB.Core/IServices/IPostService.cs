@@ -8,6 +8,7 @@ namespace NyhedsBlog_Backend.Core.IServices
     {
         public Post GetOneById(int id);
         public List<Post> GetAll();
+        public Post GetOneBySlug(string slug);
         public Post CreatePost(Post p);
         public Post DeletePost(Post p);
         public Post UpdatePost(Post p);

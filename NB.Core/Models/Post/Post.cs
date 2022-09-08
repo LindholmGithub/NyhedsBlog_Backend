@@ -11,7 +11,8 @@ namespace NyhedsBlog_Backend.Core.Models.Post
         
         public Category Category { get; set; }
         public string Title { get; set; }
-        
+        public string PrettyDescriptor { get; set; }
+
         public string FeaturedImageUrl { get; set; }
         public string Content { get; set; }
         public User.User Author { get; set; }
