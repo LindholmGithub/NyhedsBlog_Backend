@@ -99,6 +99,7 @@ namespace NB.EFCore.Repositories
                         Title = p.Title,
                         Content = p.Content,
                         FeaturedImageUrl = p.FeaturedImageUrl,
+                        PrettyDescriptor = p.PrettyDescriptor,
                         Date = p.Date,
                         RequiredSubscription = (SubscriptionType) p.RequiredSubscription,
                         Category = new Category
