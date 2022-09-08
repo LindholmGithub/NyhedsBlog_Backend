@@ -66,10 +66,10 @@ namespace NB.WebAPI.Controllers
                 }
                 catch (InvalidDataException e)
                 {
-                    return Ok(Conversion_Unauthorized(toReturn));
+                    return (toReturn.RequiredSubscription == SubscriptionType.None) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
                 }
                 
-                return Ok(Conversion_Unauthorized(toReturn));
+                return (toReturn.RequiredSubscription == SubscriptionType.None) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
             }
             catch (InvalidDataException e)
             {
@@ -90,7 +90,22 @@ namespace NB.WebAPI.Controllers
         {
             try
             {
-                return Ok(Conversion(_service.GetOneBySlug(slug)));
+                var username = _authenticationReader.GetUsername(HttpContext);
+                var password = _authenticationReader.GetPassword(HttpContext);
+
+                Post toReturn = _service.GetOneBySlug(slug);
+                try
+                {
+                    var selectedUser = _customerService.Validate(username, password);
+                    if (selectedUser.Subscription.Type >= toReturn.RequiredSubscription)
+                        return Ok(Conversion(toReturn));
+                }
+                catch (InvalidDataException e)
+                {
+                    return (toReturn.RequiredSubscription == SubscriptionType.None) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
+                }
+                
+                return (toReturn.RequiredSubscription == SubscriptionType.None) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
             }
             catch (InvalidDataException e)
             {
