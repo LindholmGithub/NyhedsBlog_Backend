@@ -66,7 +66,7 @@ namespace NB.WebAPI.Controllers
         }
 
         [HttpPost("admin")]
-        public ActionResult<Auth_Admin_DTO_Out> ValidateAdmin([FromForm] Auth_DTO_In data)
+        public ActionResult<Auth_Admin_DTO_Out> ValidateAdmin(Auth_DTO_In data)
         {
             try
             {
