@@ -56,12 +56,12 @@ namespace NB.WebAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Customer_DTO_Out> CreateCustomer([FromForm] Customer_DTO_In data)
+        public ActionResult<Customer_DTO_Out> CreateCustomer(Customer_DTO_In data)
         {
             try
             {
                 
-                var CreatedCustomer = Conversion(_service.CreateCustomer(new Customer
+                var createdCustomer = Conversion(_service.CreateCustomer(new Customer
                 {
                     Firstname = data.Firstname,
                     Lastname = data.Lastname,
@@ -78,18 +78,18 @@ namespace NB.WebAPI.Controllers
                 {
                     var base64string =
                         System.Convert.ToBase64String(
-                            System.Text.Encoding.UTF8.GetBytes(CreatedCustomer.Username + ":" + data.Password));
+                            System.Text.Encoding.UTF8.GetBytes(createdCustomer.Username + ":" + data.Password));
                     
                     var newObject = new Auth_DTO_In
                     {
-                        Username = CreatedCustomer.Username,
+                        Username = createdCustomer.Username,
                         Redirect = data.Redirect
                     };
 
-                    return Redirect(data.Redirect + "?status=200&userid="+CreatedCustomer.Id+"&message="+base64string);
+                    return Redirect(data.Redirect + "?status=200&userid="+createdCustomer.Id+"&message="+base64string);
                 }
                 
-                return Ok(CreatedCustomer);
+                return Ok(createdCustomer);
             }
             catch (ArgumentException ae)
             {
