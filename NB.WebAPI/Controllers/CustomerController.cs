@@ -9,7 +9,7 @@ using NB.WebAPI.DTO;
 using NB.WebAPI.DTO.AuthDTO;
 using NB.WebAPI.DTO.CustomerDTO;
 using NyhedsBlog_Backend.Core.IServices;
-using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Customer;
 
 namespace NB.WebAPI.Controllers
 {
@@ -29,7 +29,7 @@ namespace NB.WebAPI.Controllers
         {
             try
             {
-                return Ok(_service.GetAll().Select(Conversion));
+              return Ok(_service.GetAll().Select(Conversion));
             }
             catch (Exception e)
             {
@@ -156,6 +156,12 @@ namespace NB.WebAPI.Controllers
                 Email = c.Email,
                 PhoneNumber = c.PhoneNumber,
                 Username = c.Username,
+                Payments = c.Payments.Select(p => new Payment_DTO_Out
+                {
+                    Amount = p.Amount,
+                    PostId = p.Post.Id,
+                    Timestamp = p.Timestamp
+                }).ToList()
             };
         }
     }

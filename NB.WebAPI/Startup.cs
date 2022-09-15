@@ -16,6 +16,7 @@ using NB.EFCore;
 using NB.EFCore.Repositories;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Customer;
 using NyhedsBlog_Backend.Core.Models.Post;
 using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
@@ -70,7 +71,7 @@ namespace NB.WebAPI
             services.AddHttpContextAccessor();
             
             //Dependency Injections Here
-            services.AddScoped<ICreateReadRepository<Customer>,CustomerRepository>();
+            services.AddScoped<ICustomerRepository,CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddScoped<IPostRepository,PostRepository>();

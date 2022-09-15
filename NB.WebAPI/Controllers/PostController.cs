@@ -133,7 +133,9 @@ namespace NB.WebAPI.Controllers
                     Category = new Category{Id = data.CategoryId},
                     FeaturedImageUrl = data.FeaturedImageUrl,
                     Content = data.Content,
-                    Date = data.Date
+                    Date = data.Date,
+                    Paid = data.Paid,
+                    Price = data.Price
                 })));
             }
             catch (ArgumentException ae)
@@ -156,7 +158,9 @@ namespace NB.WebAPI.Controllers
                     FeaturedImageUrl = data.FeaturedImageUrl,
                     Category = new Category{Id = data.CategoryId},
                     Content = data.Content,
-                    Date = data.Date
+                    Date = data.Date,
+                    Paid = data.Paid,
+                    Price = data.Price
                 })));
             }
             catch (ArgumentException ae)
@@ -248,7 +252,9 @@ namespace NB.WebAPI.Controllers
                     Role = (int) p.Author.Role
                 },
                 Authorized = false,
-                Date = p.Date
+                Date = p.Date,
+                Paid = p.Paid,
+                Price = p.Price
             };
         }
     }

@@ -33,6 +33,8 @@ namespace NB.EFCore.Repositories
                 FeaturedImageUrl = obj.FeaturedImageUrl,
                 Content = obj.Content,
                 Date = DateTime.Now,
+                Paid = obj.Paid,
+                Price = obj.Price
             }).Entity;
             _ctx.SaveChanges();
             
@@ -51,6 +53,8 @@ namespace NB.EFCore.Repositories
                 FeaturedImageUrl = obj.FeaturedImageUrl,
                 Content = obj.Content,
                 Date = DateTime.Now,
+                Paid = obj.Paid,
+                Price = obj.Price
             };
             _ctx.ChangeTracker.Clear();
             _ctx.Posts.Update(newEntity);
@@ -125,6 +129,8 @@ namespace NB.EFCore.Repositories
                     FeaturedImageUrl = post.FeaturedImageUrl,
                     Content = post.Content,
                     Date = post.Date,
+                    Paid = post.Paid,
+                    Price = post.Price
                 });
             return posts;
         }

@@ -1,4 +1,6 @@
-﻿namespace NyhedsBlog_Backend.Core.Models
+﻿using System.Collections.Generic;
+
+namespace NyhedsBlog_Backend.Core.Models.Customer
 {
     public class Customer
     {
@@ -16,5 +18,7 @@
         public int PhoneNumber { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        
+        public List<Payment> Payments { get; set; }
     }
 }

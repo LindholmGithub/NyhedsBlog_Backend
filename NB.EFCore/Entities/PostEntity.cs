@@ -19,5 +19,8 @@ namespace NB.EFCore.Entities
         public UserEntity Author { get; set; }
         public int AuthorId { get; set; }
         public DateTime Date { get; set; }
+        
+        public bool Paid { get; set; }
+        public double Price { get; set; }
     }
 }

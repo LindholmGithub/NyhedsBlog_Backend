@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using NyhedsBlog_Backend.Core.IServices;
-using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Customer;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NyhedsBlog_Backend.Domain.Services
@@ -26,9 +26,9 @@ namespace NyhedsBlog_Backend.Domain.Services
             InvalidPhoneNumber = DomainStrings.InvalidData + " Phone number length must be over zero and under nine.",
             InvalidLogin = "Invalid username and/or password!";
         
-        private readonly ICreateReadRepository<Customer> _repo;
+        private readonly ICustomerRepository _repo;
 
-        public CustomerService(ICreateReadRepository<Customer> repo)
+        public CustomerService(ICustomerRepository repo)
         {
             _repo = repo;
         }
@@ -70,6 +70,11 @@ namespace NyhedsBlog_Backend.Domain.Services
         public Customer UpdateCustomer(Customer c)
         {
             return Validate(c) ? _repo.Update(c) : null;
+        }
+
+        public Customer AddPayment(Customer c, Payment p)
+        {
+            return _repo.AddPayment(c, p);
         }
 
         public Customer Validate(string username, string password)

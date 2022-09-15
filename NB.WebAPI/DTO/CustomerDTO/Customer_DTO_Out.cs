@@ -1,4 +1,5 @@
-﻿using NyhedsBlog_Backend.Core.Models;
+﻿using System.Collections.Generic;
+using NyhedsBlog_Backend.Core.Models;
 
 namespace NB.WebAPI.DTO.CustomerDTO
 {
@@ -16,5 +17,7 @@ namespace NB.WebAPI.DTO.CustomerDTO
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
         public string Username { get; set; }
+        
+        public List<Payment_DTO_Out> Payments { get; set; }
     }
 }

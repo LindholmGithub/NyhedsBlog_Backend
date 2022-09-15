@@ -16,5 +16,9 @@ namespace NB.WebAPI.DTO.PostDTO
         
         public int RequiredSubscription { get; set; }
         public DateTime Date { get; set; }
+        
+        public bool Paid { get; set; }
+        
+        public double Price { get; set; }
     }
 }

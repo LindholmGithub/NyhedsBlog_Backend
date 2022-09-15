@@ -16,5 +16,8 @@ namespace NyhedsBlog_Backend.Core.Models.Post
         public string Content { get; set; }
         public User.User Author { get; set; }
         public DateTime Date { get; set; }
+        
+        public bool Paid { get; set; }
+        public double Price { get; set; }
     }
 }
