@@ -128,6 +128,7 @@ namespace NB.EFCore.Repositories
                 Timestamp = p.Timestamp,
                 Amount = p.Amount,
                 PostId = p.Post.Id,
+                Status = (int) p.Status,
             };
         }
 
@@ -138,33 +139,10 @@ namespace NB.EFCore.Repositories
                 Id = p.Id,
                 Timestamp = p.Timestamp,
                 Amount = p.Amount,
+                Status = (PaymentStatus) p.Status,
                 Post = new Post
                 {
-                    Id = p.Post.Id,
-                    Author = new User
-                    {
-                        Id = p.Post.Author.Id,
-                        Email = p.Post.Author.Email,
-                        Firstname = p.Post.Author.Firstname,
-                        Lastname = p.Post.Author.Lastname,
-                        Username = p.Post.Author.Username,
-                        Password = p.Post.Author.Password,
-                        PhoneNumber = p.Post.Author.PhoneNumber,
-                        Role = (UserRole) p.Post.Author.Role
-                    },
-                    Category = new Category
-                    {
-                        Id = p.Post.Category.Id,
-                        Title = p.Post.Category.Title,
-                        Description = p.Post.Category.Description,
-                        PrettyDescriptor = p.Post.Category.PrettyDescriptor
-                    },
-                    Title = p.Post.Title,
-                    Content = p.Post.Content,
-                    Date = p.Post.Date,
-                    FeaturedImageUrl = p.Post.FeaturedImageUrl,
-                    PrettyDescriptor = p.Post.PrettyDescriptor,
-                    Paid = p.Post.Paid,
+                    Id = p.PostId
                 }
             };
         }
