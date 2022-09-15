@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using NB.EFCore.Entities;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
 

@@ -7,7 +7,6 @@ using Microsoft.VisualBasic;
 using NB.EFCore.Entities;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
@@ -34,7 +33,6 @@ namespace NB.EFCore.Repositories
                 FeaturedImageUrl = obj.FeaturedImageUrl,
                 Content = obj.Content,
                 Date = DateTime.Now,
-                RequiredSubscription = (int) obj.RequiredSubscription
             }).Entity;
             _ctx.SaveChanges();
             
@@ -53,7 +51,6 @@ namespace NB.EFCore.Repositories
                 FeaturedImageUrl = obj.FeaturedImageUrl,
                 Content = obj.Content,
                 Date = DateTime.Now,
-                RequiredSubscription = (int) obj.RequiredSubscription
             };
             _ctx.ChangeTracker.Clear();
             _ctx.Posts.Update(newEntity);
@@ -76,7 +73,6 @@ namespace NB.EFCore.Repositories
             
             var unit = Conversion().FirstOrDefault(post => post.Id == id) ??
                    throw new FileNotFoundException(RepositoryStrings.IdNotFound);
-            Console.WriteLine(unit.RequiredSubscription);
 
             return unit;
         }
@@ -129,7 +125,6 @@ namespace NB.EFCore.Repositories
                     FeaturedImageUrl = post.FeaturedImageUrl,
                     Content = post.Content,
                     Date = post.Date,
-                    RequiredSubscription = (SubscriptionType)post.RequiredSubscription
                 });
             return posts;
         }

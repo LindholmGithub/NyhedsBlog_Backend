@@ -13,7 +13,6 @@ using NB.WebAPI.Util;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 
 namespace NB.WebAPI.Controllers
@@ -61,15 +60,15 @@ namespace NB.WebAPI.Controllers
                 try
                 {
                     var selectedUser = _customerService.Validate(username, password);
-                    if (selectedUser.Subscription.Type >= toReturn.RequiredSubscription)
+                    if (true)
                         return Ok(Conversion(toReturn));
                 }
                 catch (InvalidDataException e)
                 {
-                    return (toReturn.RequiredSubscription == SubscriptionType.None) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
+                    return (true) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
                 }
                 
-                return (toReturn.RequiredSubscription == SubscriptionType.None) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
+                return (true) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
             }
             catch (InvalidDataException e)
             {
@@ -97,15 +96,15 @@ namespace NB.WebAPI.Controllers
                 try
                 {
                     var selectedUser = _customerService.Validate(username, password);
-                    if (selectedUser.Subscription.Type >= toReturn.RequiredSubscription)
+                    if (true)
                         return Ok(Conversion(toReturn));
                 }
                 catch (InvalidDataException e)
                 {
-                    return (toReturn.RequiredSubscription == SubscriptionType.None) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
+                    return (true) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
                 }
                 
-                return (toReturn.RequiredSubscription == SubscriptionType.None) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
+                return (true) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
             }
             catch (InvalidDataException e)
             {
@@ -134,7 +133,6 @@ namespace NB.WebAPI.Controllers
                     Category = new Category{Id = data.CategoryId},
                     FeaturedImageUrl = data.FeaturedImageUrl,
                     Content = data.Content,
-                    RequiredSubscription = (SubscriptionType) data.RequiredSubscription,
                     Date = data.Date
                 })));
             }
@@ -158,7 +156,6 @@ namespace NB.WebAPI.Controllers
                     FeaturedImageUrl = data.FeaturedImageUrl,
                     Category = new Category{Id = data.CategoryId},
                     Content = data.Content,
-                    RequiredSubscription = (SubscriptionType) data.RequiredSubscription,
                     Date = data.Date
                 })));
             }
@@ -219,7 +216,6 @@ namespace NB.WebAPI.Controllers
                     Role = (int) p.Author.Role
                 },
                 Authorized = true,
-                RequiredSubscription = (int)p.RequiredSubscription,
                 Date = p.Date
             };
         }
@@ -252,7 +248,6 @@ namespace NB.WebAPI.Controllers
                     Role = (int) p.Author.Role
                 },
                 Authorized = false,
-                RequiredSubscription = (int)p.RequiredSubscription,
                 Date = p.Date
             };
         }

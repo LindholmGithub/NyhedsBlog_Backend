@@ -1,6 +1,5 @@
 ﻿using System;
 using NyhedsBlog_Backend.Core.Models.Post;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 
 namespace NyhedsBlog_Backend.Core.Models.Post
@@ -16,8 +15,6 @@ namespace NyhedsBlog_Backend.Core.Models.Post
         public string FeaturedImageUrl { get; set; }
         public string Content { get; set; }
         public User.User Author { get; set; }
-        
-        public SubscriptionType RequiredSubscription { get; set; }
         public DateTime Date { get; set; }
     }
 }

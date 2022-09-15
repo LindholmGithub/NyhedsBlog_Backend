@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using NB.WebAPI.DTO;
 using NB.WebAPI.DTO.AuthDTO;
 using NB.WebAPI.DTO.CustomerDTO;
-using NB.WebAPI.DTO.SubscriptionDTO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 
@@ -157,12 +156,6 @@ namespace NB.WebAPI.Controllers
                 Email = c.Email,
                 PhoneNumber = c.PhoneNumber,
                 Username = c.Username,
-                Subscription = new Subscription_DTO_Out
-                {
-                    DateFrom = c.Subscription.DateFrom,
-                    DateTo = c.Subscription.DateTo,
-                    Type = c.Subscription.Type
-                }
             };
         }
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using NyhedsBlog_Backend.Core.Models.Post;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 
 namespace NB.EFCore.Entities
@@ -19,8 +18,6 @@ namespace NB.EFCore.Entities
         public string Content { get; set; }
         public UserEntity Author { get; set; }
         public int AuthorId { get; set; }
-        
-        public int RequiredSubscription { get; set; }
         public DateTime Date { get; set; }
     }
 }

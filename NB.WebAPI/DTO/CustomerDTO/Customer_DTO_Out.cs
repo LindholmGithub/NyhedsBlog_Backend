@@ -1,6 +1,4 @@
-﻿using NB.WebAPI.DTO.SubscriptionDTO;
-using NyhedsBlog_Backend.Core.Models;
-using NyhedsBlog_Backend.Core.Models.Subscription;
+﻿using NyhedsBlog_Backend.Core.Models;
 
 namespace NB.WebAPI.DTO.CustomerDTO
 {
@@ -18,7 +16,5 @@ namespace NB.WebAPI.DTO.CustomerDTO
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
         public string Username { get; set; }
-        
-        public Subscription_DTO_Out Subscription { get; set; }
     }
 }

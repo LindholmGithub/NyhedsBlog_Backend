@@ -2,7 +2,6 @@
 using NB.WebAPI.DTO.CategoryDTO;
 using NB.WebAPI.DTO.UserDTO;
 using NyhedsBlog_Backend.Core.Models.Post;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 
 namespace NB.WebAPI.DTO.PostDTO

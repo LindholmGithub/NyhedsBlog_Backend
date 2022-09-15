@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NyhedsBlog_Backend.Domain.Services
@@ -28,12 +27,10 @@ namespace NyhedsBlog_Backend.Domain.Services
             InvalidLogin = "Invalid username and/or password!";
         
         private readonly ICreateReadRepository<Customer> _repo;
-        private readonly ICreateReadRepository<Subscription> _subRepo;
 
-        public CustomerService(ICreateReadRepository<Customer> repo, ICreateReadRepository<Subscription> subRepo)
+        public CustomerService(ICreateReadRepository<Customer> repo)
         {
             _repo = repo;
-            _subRepo = subRepo;
         }
         
         public Customer GetOneById(int id)
@@ -54,15 +51,6 @@ namespace NyhedsBlog_Backend.Domain.Services
         {
             if (Validate(c))
             {
-                Subscription sub = _subRepo.Create(new Subscription
-                {
-                    DateFrom = DateTime.Now,
-                    DateTo = DateTime.MaxValue,
-                    Type = SubscriptionType.None
-                });
-
-                c.Subscription = sub;
-
                 return _repo.Create(c);
             }
 

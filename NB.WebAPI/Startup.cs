@@ -17,7 +17,6 @@ using NB.EFCore.Repositories;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
 using NyhedsBlog_Backend.Domain.Services;
@@ -74,9 +73,6 @@ namespace NB.WebAPI
             services.AddScoped<ICreateReadRepository<Customer>,CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
 
-            services.AddScoped<ICreateReadRepository<Subscription>, SubscriptionRepository>();
-            services.AddScoped<ISubscriptionService, SubscriptionService>();
-            
             services.AddScoped<IPostRepository,PostRepository>();
             services.AddScoped<IPostService, PostService>();
             

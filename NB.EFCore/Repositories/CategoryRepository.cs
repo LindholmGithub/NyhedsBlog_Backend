@@ -4,7 +4,6 @@ using System.Linq;
 using NB.EFCore.Entities;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
@@ -101,7 +100,6 @@ namespace NB.EFCore.Repositories
                         FeaturedImageUrl = p.FeaturedImageUrl,
                         PrettyDescriptor = p.PrettyDescriptor,
                         Date = p.Date,
-                        RequiredSubscription = (SubscriptionType) p.RequiredSubscription,
                         Category = new Category
                         {
                             Id = p.Category.Id,

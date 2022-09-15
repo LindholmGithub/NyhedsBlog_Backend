@@ -44,33 +44,6 @@ namespace NB.EFCore
                     PrettyDescriptor = "frontpage"
                 });
 
-            modelBuilder.Entity<SubscriptionEntity>()
-                .HasData(new SubscriptionEntity
-                {
-                    Id = 1,
-                    Type = 0,
-                    DateFrom = DateTime.MinValue,
-                    DateTo = DateTime.MaxValue
-                });
-
-            modelBuilder.Entity<SubscriptionEntity>()
-                .HasData(new SubscriptionEntity
-                {
-                    Id = 2,
-                    Type = 1,
-                    DateFrom = DateTime.MinValue,
-                    DateTo = DateTime.MaxValue
-                });
-            
-            modelBuilder.Entity<SubscriptionEntity>()
-                .HasData(new SubscriptionEntity
-                {
-                    Id = 3,
-                    Type = 2,
-                    DateFrom = DateTime.MinValue,
-                    DateTo = DateTime.MaxValue
-                });
-            
             modelBuilder.Entity<CustomerEntity>()
                 .HasData(new CustomerEntity
                 {
@@ -84,7 +57,6 @@ namespace NB.EFCore
                     Username = "test1@test.com",
                     Password = "test1234",
                     PhoneNumber = 42042069,
-                    SubscriptionId = 1
                 });
             
             modelBuilder.Entity<CustomerEntity>()
@@ -100,7 +72,6 @@ namespace NB.EFCore
                     Username = "test2@test.com",
                     Password = "test1234",
                     PhoneNumber = 42042069,
-                    SubscriptionId = 2
                 });
             
             modelBuilder.Entity<CustomerEntity>()
@@ -116,7 +87,6 @@ namespace NB.EFCore
                     Username = "test3@test.com",
                     Password = "test1234",
                     PhoneNumber = 42042069,
-                    SubscriptionId = 3
                 });
 
             var numberOfCategories = 10;
@@ -150,7 +120,6 @@ namespace NB.EFCore
                         PrettyDescriptor = "post-nr-" + nextId,
                         Title = "Post " + x + " in Categori " + i,
                         Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu.",
-                        RequiredSubscription = 2,
                         Date = DateTime.Now,
                         FeaturedImageUrl = "https://picsum.photos/800/300"
                     });
@@ -163,7 +132,6 @@ namespace NB.EFCore
         }
 
         public DbSet<CustomerEntity> Customers { get; set; }
-        public DbSet<SubscriptionEntity> Subscriptions { get; set; }
         public DbSet<PostEntity> Posts { get; set; }
         public DbSet<PageEntity> Pages { get; set; }
         public DbSet<CategoryEntity> Categories { get; set; }

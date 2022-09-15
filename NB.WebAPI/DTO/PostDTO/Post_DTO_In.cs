@@ -1,6 +1,5 @@
 ﻿using System;
 using NyhedsBlog_Backend.Core.Models.Post;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Core.Models.User;
 
 namespace NB.WebAPI.DTO.PostDTO

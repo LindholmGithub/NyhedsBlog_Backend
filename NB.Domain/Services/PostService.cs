@@ -4,7 +4,6 @@ using System.IO;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
 using NyhedsBlog_Backend.Core.Models.Post;
-using NyhedsBlog_Backend.Core.Models.Subscription;
 using NyhedsBlog_Backend.Domain.IRepositories;
 
 namespace NyhedsBlog_Backend.Domain.Services
@@ -38,7 +37,6 @@ namespace NyhedsBlog_Backend.Domain.Services
         {
             if (id > 0)
             {
-                Console.WriteLine(_repo.GetById(id).RequiredSubscription);
                 return _repo.GetById(id);
             }
             throw new InvalidDataException(DomainStrings.IdMustBeOverZero);
@@ -56,7 +54,6 @@ namespace NyhedsBlog_Backend.Domain.Services
 
         public Post CreatePost(Post p)
         {
-            Console.Write(p.RequiredSubscription);
             return Validate(p) ? _repo.Create(p) : null;
         }
 
