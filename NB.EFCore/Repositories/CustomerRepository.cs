@@ -44,6 +44,7 @@ namespace NB.EFCore.Repositories
             var oldObject = GetById(obj.Id);
 
             obj.Payments ??= oldObject.Payments;
+            obj.Password ??= oldObject.Password;
 
             var newEntity = new CustomerEntity
             {
