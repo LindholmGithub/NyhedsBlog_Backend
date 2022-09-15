@@ -69,7 +69,7 @@ namespace NyhedsBlog_Backend.Domain.Services
 
         public Customer UpdateCustomer(Customer c)
         {
-            return Validate(c) ? _repo.Update(c) : null;
+            return ValidateUpdate(c) ? _repo.Update(c) : null;
         }
 
         public Customer AddPayment(Customer c, Payment p)
@@ -97,6 +97,28 @@ namespace NyhedsBlog_Backend.Domain.Services
             if (obj.Password.Length < PasswordMinimumLength)
                 throw new InvalidDataException(InvalidPassword);
             
+            if (obj.Email.Length <= 0 || !new EmailAddressAttribute().IsValid(obj.Email))
+                throw new InvalidDataException(InvalidEmail);
+            
+            if (obj.Firstname.Length <= 0)
+                throw new InvalidDataException(InvalidFirstName);
+
+            if (obj.Lastname.Length <= 0)
+                throw new InvalidDataException(InvalidLastName);
+
+            if (obj.PhoneNumber is not (> 0 and <= 999999999))
+                throw new InvalidDataException(InvalidPhoneNumber);
+
+            return true;
+        }
+        public bool ValidateUpdate(Customer obj)
+        {
+            if (obj.Username.Length < UsernameMinimumLength)
+                throw new InvalidDataException(InvalidUsername);
+            
+            if (obj.Password is {Length: < PasswordMinimumLength})
+                throw new InvalidDataException(InvalidPassword);
+
             if (obj.Email.Length <= 0 || !new EmailAddressAttribute().IsValid(obj.Email))
                 throw new InvalidDataException(InvalidEmail);
             
