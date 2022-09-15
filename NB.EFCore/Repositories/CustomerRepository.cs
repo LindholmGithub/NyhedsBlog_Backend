@@ -41,6 +41,13 @@ namespace NB.EFCore.Repositories
 
         public Customer Update(Customer obj)
         {
+            var oldObject = GetById(obj.Id);
+
+            if(!(obj.Payments.Count > oldObject.Payments.Count))
+            {
+                obj.Payments = oldObject.Payments;
+            }
+            
             var newEntity = new CustomerEntity
             {
                 Id = obj.Id,
