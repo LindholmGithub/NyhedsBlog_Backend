@@ -61,16 +61,9 @@ namespace NB.WebAPI.Controllers
 
                 Post toReturn = _service.GetOneById(id);
 
-                try
-                {
-                    var adminUser = _userService.Validate(username, password);
-
+                var adminUser = _userService.Validate(username, password);
+                if(adminUser != null)
                     return Ok(Conversion(toReturn));
-                }
-                catch
-                {
-                    
-                }
 
                 if (!toReturn.Paid)
                     return Ok(Conversion(toReturn));
@@ -111,17 +104,11 @@ namespace NB.WebAPI.Controllers
 
                 Post toReturn = _service.GetOneBySlug(slug);
                 
-                try
-                {
-                    var adminUser = _userService.Validate(username, password);
-
-                    return Ok(Conversion(toReturn));
-                }
-                catch
-                {
-                    
-                }
+                var adminUser = _userService.Validate(username, password);
                 
+                if(adminUser != null)
+                    return Ok(Conversion(toReturn));
+
                 if (!toReturn.Paid)
                     return Ok(Conversion(toReturn));
                 
@@ -156,10 +143,17 @@ namespace NB.WebAPI.Controllers
         {
             try
             {
+                var username = _authenticationReader.GetUsername(HttpContext);
+                var password = _authenticationReader.GetPassword(HttpContext);
+                
+                var adminUser = _userService.Validate(username, password);
+                if (adminUser == null)
+                    return Unauthorized();
+                
                 return Ok(Conversion(_service.CreatePost(new Post
                 {
                     Title = data.Title,
-                    Author = new User{Id = data.AuthorId},
+                    Author = adminUser,
                     PrettyDescriptor = data.PrettyDescriptor,
                     Category = new Category{Id = data.CategoryId},
                     FeaturedImageUrl = data.FeaturedImageUrl,
