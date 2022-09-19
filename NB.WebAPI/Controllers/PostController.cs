@@ -62,6 +62,7 @@ namespace NB.WebAPI.Controllers
                 Post toReturn = _service.GetOneById(id);
 
                 var adminUser = _userService.Validate(username, password);
+                
                 if(adminUser != null)
                     return Ok(Conversion(toReturn));
 
