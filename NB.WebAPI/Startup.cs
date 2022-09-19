@@ -103,6 +103,7 @@ namespace NB.WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NB.WebAPI v1"));
                 app.UseCors("Prod-cors");
+                app.UseHttpsRedirection();
             }
             
             
@@ -112,10 +113,6 @@ namespace NB.WebAPI
                 ctx.Database.EnsureDeleted();
                 ctx.Database.EnsureCreated();
             }
-            
-            
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
             

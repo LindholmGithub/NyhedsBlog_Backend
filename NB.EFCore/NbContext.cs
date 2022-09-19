@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using NB.EFCore.Entities;
+using NyhedsBlog_Backend.Core.Models.Customer;
 
 namespace NB.EFCore
 {
@@ -16,6 +17,10 @@ namespace NB.EFCore
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<CustomerEntity>()
+                .HasMany<PaymentEntity>(c => c.Payments)
+                .WithOne(p => p.Customer);
+            
             modelBuilder.Entity<CategoryEntity>()
                 .HasMany<PostEntity>(c => c.Posts)
                 .WithOne(p => p.Category);
@@ -140,6 +145,6 @@ namespace NB.EFCore
         
         public DbSet<UserEntity> Users { get; set; }
         
-        
+        public DbSet<PaymentEntity> Payments { get; set; }
     }
 }

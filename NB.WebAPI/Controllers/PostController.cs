@@ -12,6 +12,7 @@ using NB.WebAPI.DTO.UserDTO;
 using NB.WebAPI.Util;
 using NyhedsBlog_Backend.Core.IServices;
 using NyhedsBlog_Backend.Core.Models;
+using NyhedsBlog_Backend.Core.Models.Customer;
 using NyhedsBlog_Backend.Core.Models.Post;
 using NyhedsBlog_Backend.Core.Models.User;
 
@@ -57,18 +58,21 @@ namespace NB.WebAPI.Controllers
                 var password = _authenticationReader.GetPassword(HttpContext);
 
                 Post toReturn = _service.GetOneById(id);
+
+                if (!toReturn.Paid)
+                    return Ok(Conversion(toReturn));
+                
                 try
                 {
                     var selectedUser = _customerService.Validate(username, password);
-                    if (true)
-                        return Ok(Conversion(toReturn));
+                    var authorized = selectedUser.Payments.LastOrDefault(obj => obj.Post.Id == toReturn.Id);
+
+                    return authorized is {Status: PaymentStatus.CAPTURED} ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
                 }
                 catch (InvalidDataException e)
                 {
-                    return (true) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
+                    return Ok(Conversion_Unauthorized(toReturn));
                 }
-                
-                return (true) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
             }
             catch (InvalidDataException e)
             {
@@ -93,18 +97,21 @@ namespace NB.WebAPI.Controllers
                 var password = _authenticationReader.GetPassword(HttpContext);
 
                 Post toReturn = _service.GetOneBySlug(slug);
+                
+                if (!toReturn.Paid)
+                    return Ok(Conversion(toReturn));
+                
                 try
                 {
                     var selectedUser = _customerService.Validate(username, password);
-                    if (true)
-                        return Ok(Conversion(toReturn));
+                    var authorized = selectedUser.Payments.LastOrDefault(obj => obj.Post.Id == toReturn.Id);
+                    
+                    return authorized is {Status: PaymentStatus.CAPTURED} ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
                 }
                 catch (InvalidDataException e)
                 {
-                    return (true) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
+                    return Ok(Conversion_Unauthorized(toReturn));
                 }
-                
-                return (true) ? Ok(Conversion(toReturn)) : Ok(Conversion_Unauthorized(toReturn));
             }
             catch (InvalidDataException e)
             {
@@ -220,7 +227,9 @@ namespace NB.WebAPI.Controllers
                     Role = (int) p.Author.Role
                 },
                 Authorized = true,
-                Date = p.Date
+                Date = p.Date,
+                Paid = p.Paid,
+                Price = p.Price
             };
         }
         

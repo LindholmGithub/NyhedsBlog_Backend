@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -92,12 +93,37 @@ namespace NB.EFCore.Repositories
             return Conversion().Where(customer => customer.Username == term).ToList();
         }
 
-        public Customer AddPayment(Customer c, Payment p)
+        public Payment AddPayment(Payment p)
         {
-            var currentCustomer = GetById(c.Id);
-            currentCustomer.Payments.Add(p);
+            var entityToAdd = ConvertPaymentToEntity(p);
+            _ctx.Payments.Add(entityToAdd);
+            _ctx.SaveChanges();
 
-            return Update(currentCustomer);
+            p.Id = entityToAdd.Id;
+
+            return p;
+        }
+
+        public Payment UpdatePayment(Payment p)
+        {
+            var obj = ConvertPaymentToEntity(p);
+            obj.Id = p.Id;
+            
+            _ctx.ChangeTracker.Clear();
+            _ctx.Update(obj);
+            _ctx.SaveChanges();
+
+            return GetPayment(p.Id);
+        }
+
+        public Payment GetPayment(int id)
+        {
+            return _ctx.Payments.Select(obj => ConvertPaymentEntityToModel(obj)).ToList().FirstOrDefault(obj => obj.Id == id);
+        }
+
+        private void DeletePayment(int id)
+        {
+            _ctx.Payments.Remove(new PaymentEntity {Id = id});
         }
 
         private IQueryable<Customer> Conversion()
@@ -124,11 +150,12 @@ namespace NB.EFCore.Repositories
         {
             return new PaymentEntity
             {
-                Id = p.Id,
                 Timestamp = p.Timestamp,
                 Amount = p.Amount,
                 PostId = p.Post.Id,
                 Status = (int) p.Status,
+                CustomerId = p.CustomerId,
+                PaymentLink = p.PaymentLink
             };
         }
 
@@ -143,7 +170,9 @@ namespace NB.EFCore.Repositories
                 Post = new Post
                 {
                     Id = p.PostId
-                }
+                },
+                CustomerId = p.CustomerId,
+                PaymentLink = p.PaymentLink
             };
         }
     }

@@ -4,6 +4,9 @@ namespace NyhedsBlog_Backend.Domain.IRepositories
 {
     public interface ICustomerRepository : ICreateReadRepository<Customer>
     {
-        public Customer AddPayment(Customer c, Payment p);
+        public Payment AddPayment(Payment p);
+
+        public Payment UpdatePayment(Payment p);
+        public Payment GetPayment(int id);
     }
 }

@@ -24,19 +24,24 @@ namespace NB.WebAPI.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        private const string FREEPAY_API_KEY = "da000255-75b4-41f3-aa70-3e751570baba";
+        private const string FREEPAY_GW_URL = "https://gw.freepay.dk/api/";
+        private const string FREEPAY_MW_URL = "https://mw.freepay.dk/api/";
+
+        private const string NB_API_URL = "https://status1-azure.azurewebsites.net";
+        private const string NB_WEB_URL = "https://status1.dk";
+        
         private readonly ICustomerService _service;
         private readonly IPostService _postService;
         private readonly BasicAuthenticationReader _authenticationReader;
         private readonly HttpClient _httpClient;
-
         public CustomerController(ICustomerService service, IPostService postService)
         {
             _service = service;
             _postService = postService;
             _authenticationReader = new BasicAuthenticationReader();
             _httpClient = new HttpClient();
-            _httpClient.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse("da000255-75b4-41f3-aa70-3e751570baba");
-            _httpClient.BaseAddress = new Uri("https://gw.freepay.dk/api/");
+            _httpClient.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse(FREEPAY_API_KEY);
         }
 
         [HttpGet]
@@ -69,6 +74,53 @@ namespace NB.WebAPI.Controllers
             }
         }
 
+        [HttpGet("decline/{paymentId:int}")]
+        public ActionResult<Payment_DTO_Out> DeclinePayment(int paymentId)
+        {
+            var oldPayment = _service.GetPayment(paymentId);
+            oldPayment.Status = PaymentStatus.DECLINED;
+            _service.UpdatePayment(oldPayment);
+
+            var currentPost = _postService.GetOneById(oldPayment.Post.Id);
+
+            return Redirect(NB_WEB_URL + "/payment-failed");
+        }
+
+        [HttpGet("capture/{paymentId:int}")]
+        public async Task<ActionResult<Payment_DTO_Out>> CapturePayment(int paymentId, string authorizationIdentifier)
+        {
+            if (String.IsNullOrEmpty(authorizationIdentifier) && authorizationIdentifier.Length > 5)
+                return BadRequest();
+
+            var urlToSend = FREEPAY_MW_URL + "authorization/" + authorizationIdentifier +
+                            "/capture";
+
+            var response = await _httpClient.PostAsync(urlToSend, new StringContent(""));
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Response code: " + response.StatusCode);
+                return Redirect(NB_WEB_URL + "/payment-failed");
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var deserialized = JsonSerializer.Deserialize<Freepay_DTO_Auth_Receive>(content);
+
+            if (deserialized.IsSuccess)
+            {
+                var oldPayment = _service.GetPayment(paymentId);
+                oldPayment.Status = PaymentStatus.CAPTURED;
+                _service.UpdatePayment(oldPayment);
+
+                var currentPost = _postService.GetOneById(oldPayment.Post.Id);
+
+                return Redirect(NB_WEB_URL + "/indlaeg/" + currentPost.PrettyDescriptor);
+            }
+            else
+            {
+                return Redirect(NB_WEB_URL + "/payment-failed");
+            }
+        }
+
         [HttpPost("buy/{postId:int}")]
         public async Task<ActionResult<Payment_DTO_Out>> BuyPost(int postId)
         {
@@ -85,13 +137,14 @@ namespace NB.WebAPI.Controllers
                 try
                 {
                     var authUser = _service.Validate(username, password);
-                    var newPayment = _service.AddPayment(authUser, new Payment
+                    var newPayment = _service.AddPayment(new Payment
                     {
                         Amount = post.Price,
                         Post = post,
                         Status = PaymentStatus.CREATED,
-                        Timestamp = DateTime.Now
-                    }).Payments.Last();
+                        Timestamp = DateTime.Now,
+                        CustomerId = authUser.Id
+                    });
 
                     var freepayRequest = JsonSerializer.Serialize(new Freepay_DTO_Send
                     {
@@ -99,8 +152,8 @@ namespace NB.WebAPI.Controllers
                         Currency = "DKK",
                         OrderNumber = "S1-" + newPayment.Id,
                         SaveCard = false,
-                        CustomerAcceptUrl = "https://status1.dk/payment-confirmed",
-                        CustomerDeclineUrl = "https://status1.dk/payment-declined",
+                        CustomerAcceptUrl = NB_API_URL + "/api/customer/capture/" + newPayment.Id,
+                        CustomerDeclineUrl = NB_API_URL + "/api/customer/decline/" + newPayment.Id,
                         EnforceLanguage = "da-DK",
                         BillingAddress = new BillingAddress
                         {
@@ -116,22 +169,26 @@ namespace NB.WebAPI.Controllers
                     });
                     var requestContent = new StringContent(freepayRequest, Encoding.UTF8, "application/json");
 
-                    var response = await _httpClient.PostAsync("payment", requestContent);
+                    var urlToSend = FREEPAY_GW_URL + "payment";
+                    
+                    var response = await _httpClient.PostAsync(urlToSend, requestContent);
                     if (!response.IsSuccessStatusCode)
                         return StatusCode(500, new Error_DTO(500, ApiStrings.InternalServerError));
 
                     var content = await response.Content.ReadAsStringAsync();
                     var deserialized = JsonSerializer.Deserialize<Freepay_DTO_Receive>(content);
 
-                    Console.WriteLine(content);
-
+                    newPayment.PaymentLink = deserialized.paymentWindowLink;
+                    _service.UpdatePayment(newPayment);
+                    
                     return Ok(new Payment_DTO_Out
                     {
+                        Id = newPayment.Id,
                         Amount = newPayment.Amount,
                         PostId = newPayment.Post.Id,
-                        Status = newPayment.Status,
+                        Status = (int) newPayment.Status,
                         Timestamp = newPayment.Timestamp,
-                        PaymentLink = deserialized.paymentWindowLink
+                        PaymentLink = newPayment.PaymentLink
                     });
                 }
                 catch (InvalidDataException e)
@@ -253,10 +310,12 @@ namespace NB.WebAPI.Controllers
                 Username = c.Username,
                 Payments = c.Payments.Select(p => new Payment_DTO_Out
                 {
+                    Id = p.Id,
                     Amount = p.Amount,
                     PostId = p.Post.Id,
                     Timestamp = p.Timestamp,
-                    Status = p.Status
+                    Status = (int) p.Status,
+                    PaymentLink = p.PaymentLink
                 }).ToList()
             };
         }

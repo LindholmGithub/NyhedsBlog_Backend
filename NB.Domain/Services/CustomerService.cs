@@ -72,9 +72,19 @@ namespace NyhedsBlog_Backend.Domain.Services
             return ValidateUpdate(c) ? _repo.Update(c) : null;
         }
 
-        public Customer AddPayment(Customer c, Payment p)
+        public Payment AddPayment(Payment p)
         {
-            return _repo.AddPayment(c, p);
+            return _repo.AddPayment(p);
+        }
+
+        public Payment UpdatePayment(Payment p)
+        {
+            return _repo.UpdatePayment(p);
+        }
+
+        public Payment GetPayment(int id)
+        {
+            return _repo.GetPayment(id);
         }
 
         public Customer Validate(string username, string password)
