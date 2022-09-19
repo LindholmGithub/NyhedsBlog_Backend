@@ -26,12 +26,14 @@ namespace NB.WebAPI.Controllers
         
         private readonly IPostService _service;
         private readonly ICustomerService _customerService;
+        private readonly IUserService _userService;
         private readonly BasicAuthenticationReader _authenticationReader;
 
-        public PostController(IPostService service, ICustomerService customerService)
+        public PostController(IPostService service, ICustomerService customerService, IUserService userService)
         {
             _service = service;
             _customerService = customerService;
+            _userService = userService;
             _authenticationReader = new BasicAuthenticationReader();
         }
         
@@ -58,6 +60,17 @@ namespace NB.WebAPI.Controllers
                 var password = _authenticationReader.GetPassword(HttpContext);
 
                 Post toReturn = _service.GetOneById(id);
+
+                try
+                {
+                    var adminUser = _userService.Validate(username, password);
+
+                    return Ok(Conversion(toReturn));
+                }
+                catch
+                {
+                    
+                }
 
                 if (!toReturn.Paid)
                     return Ok(Conversion(toReturn));
@@ -97,6 +110,17 @@ namespace NB.WebAPI.Controllers
                 var password = _authenticationReader.GetPassword(HttpContext);
 
                 Post toReturn = _service.GetOneBySlug(slug);
+                
+                try
+                {
+                    var adminUser = _userService.Validate(username, password);
+
+                    return Ok(Conversion(toReturn));
+                }
+                catch
+                {
+                    
+                }
                 
                 if (!toReturn.Paid)
                     return Ok(Conversion(toReturn));
