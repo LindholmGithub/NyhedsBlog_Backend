@@ -92,7 +92,7 @@ namespace NB.WebAPI.Controllers
                     PrettyDescriptor = data.PrettyDescriptor,
                     Author = new User{Id = data.AuthorId},
                     Content = data.Content,
-                    Date = data.Date
+                    Date = DateTime.Now
                 })));
             }
             catch (ArgumentException ae)
