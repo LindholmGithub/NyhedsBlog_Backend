@@ -41,11 +41,7 @@ namespace NB.EFCore.Repositories
                 Description = obj.Description,
                 Title = obj.Title,
                 Featured = obj.Featured,
-                PrettyDescriptor = obj.PrettyDescriptor,
-                Posts = obj.Posts.Select(o => new PostEntity
-                {
-                    Id = o.Id
-                }).ToList()
+                PrettyDescriptor = obj.PrettyDescriptor
             };
             _ctx.ChangeTracker.Clear();
             _ctx.Categories.Update(newEntity);

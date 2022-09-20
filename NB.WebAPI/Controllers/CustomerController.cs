@@ -207,7 +207,20 @@ namespace NB.WebAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Customer_DTO_Out> CreateCustomer(Customer_DTO_In data)
+        [Consumes("application/json")]
+        public ActionResult<Customer_DTO_Out> CreateCustomer([FromBody] Customer_DTO_In data)
+        {
+            return CreateCustomer_Private(data);
+        }
+
+        [HttpPost]
+        [Consumes("application/x-www-form-urlencoded")]
+        public ActionResult<Customer_DTO_Out> CreateCustomer_Form([FromForm] Customer_DTO_In data)
+        {
+            return CreateCustomer_Private(data);
+        }
+        
+        private ActionResult<Customer_DTO_Out> CreateCustomer_Private(Customer_DTO_In data)
         {
             try
             {
