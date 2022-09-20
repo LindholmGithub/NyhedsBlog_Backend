@@ -110,7 +110,7 @@ namespace NB.WebAPI
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var ctx = scope.ServiceProvider.GetService<NbContext>();
-                ctx.Database.EnsureDeleted();
+                //ctx.Database.EnsureDeleted();
                 ctx.Database.EnsureCreated();
             }
 
