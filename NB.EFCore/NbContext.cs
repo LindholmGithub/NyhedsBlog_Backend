@@ -29,11 +29,11 @@ namespace NB.EFCore
                 .HasData(new UserEntity
                 {
                     Id = 1,
-                    Firstname = "Bobby",
-                    Lastname = "Olsen",
-                    Email = "bobby@olsen.as",
-                    Username = "test@test.com",
-                    Password = "test1234",
+                    Firstname = "Ulla",
+                    Lastname = "Højgaard",
+                    Email = "ulla@govarde.dk",
+                    Username = "ulla@govarde.dk",
+                    Password = "Alberte1212",
                     PhoneNumber = 42424242,
                     Role = 3
                 });
@@ -42,11 +42,24 @@ namespace NB.EFCore
                 .HasData(new UserEntity
                 {
                     Id = 2,
-                    Firstname = "Ole",
-                    Lastname = "Bobbysen",
-                    Email = "bobby@olsen.as",
-                    Username = "test2@test.com",
-                    Password = "test1234",
+                    Firstname = "Christian",
+                    Lastname = "Lindholm",
+                    Email = "christian@mqservice.dk",
+                    Username = "christian@mqservice.dk",
+                    Password = "Christian1234",
+                    PhoneNumber = 42424242,
+                    Role = 3
+                });
+            
+            modelBuilder.Entity<UserEntity>()
+                .HasData(new UserEntity
+                {
+                    Id = 3,
+                    Firstname = "Mads",
+                    Lastname = "Qvistgaard",
+                    Email = "mads@mqservice.dk",
+                    Username = "mads@mqservice.dk",
+                    Password = "Mads1234",
                     PhoneNumber = 42424242,
                     Role = 3
                 });
@@ -61,95 +74,6 @@ namespace NB.EFCore
                     Date = DateTime.Now,
                     PrettyDescriptor = "frontpage"
                 });
-
-            modelBuilder.Entity<CustomerEntity>()
-                .HasData(new CustomerEntity
-                {
-                    Id = 1,
-                    Firstname = "Ole",
-                    Lastname = "Bobbysen",
-                    Address = "Testgade 69",
-                    Zipcode = 6969,
-                    City = "Testby",
-                    Email = "test1@test.com",
-                    Username = "test1@test.com",
-                    Password = "test1234",
-                    PhoneNumber = 42042069,
-                });
-            
-            modelBuilder.Entity<CustomerEntity>()
-                .HasData(new CustomerEntity
-                {
-                    Id = 2,
-                    Firstname = "Ole",
-                    Lastname = "Bobbysen",
-                    Address = "Testgade 69",
-                    Zipcode = 6969,
-                    City = "Testby",
-                    Email = "test2@test.com",
-                    Username = "test2@test.com",
-                    Password = "test1234",
-                    PhoneNumber = 42042069,
-                });
-            
-            modelBuilder.Entity<CustomerEntity>()
-                .HasData(new CustomerEntity
-                {
-                    Id = 3,
-                    Firstname = "Ole",
-                    Lastname = "Bobbysen",
-                    Address = "Testgade 69",
-                    Zipcode = 6969,
-                    City = "Testby",
-                    Email = "test3@test.com",
-                    Username = "test3@test.com",
-                    Password = "test1234",
-                    PhoneNumber = 42042069,
-                });
-
-            var numberOfCategories = 10;
-            List<CategoryEntity> generatedCategories = new List<CategoryEntity>();
-
-            for (int i = 1; i <= numberOfCategories; i++)
-            {
-                generatedCategories.Add(new CategoryEntity
-                {
-                    Id = i,
-                    Title = "Kategori " + i,
-                    Description = "Tester med seedet data",
-                    PrettyDescriptor = "kategori-" + i,
-                    Featured = i % 2 == 0
-                });
-            }
-
-            modelBuilder.Entity<CategoryEntity>()
-                .HasData(generatedCategories);
-
-            List<PostEntity> generatedPosts = new List<PostEntity>();
-            var nextId = 1;
-            for (int i = 1; i <= numberOfCategories; i++)
-            {
-                for (int x = 1; x <= 12; x++)
-                {
-                    generatedPosts.Add(new PostEntity
-                    {
-                        Id = nextId,
-                        AuthorId = i % 2 == 0 ? 1 : 2,
-                        CategoryId = i,
-                        PrettyDescriptor = "post-nr-" + nextId,
-                        Title = "Post " + x + " in Categori " + i,
-                        Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu.",
-                        Date = DateTime.Now,
-                        FeaturedImageUrl = "https://picsum.photos/800/300",
-                        Paid = i % 3 == 0,
-                        Price = 10
-                    });
-                    nextId++;
-                }
-            }
-
-            modelBuilder.Entity<PostEntity>()
-                .HasData(generatedPosts);
         }
 
         public DbSet<CustomerEntity> Customers { get; set; }
