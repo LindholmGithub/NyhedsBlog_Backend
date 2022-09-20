@@ -7,6 +7,7 @@ namespace NyhedsBlog_Backend.Core.Models.Post
         public int Id { get; set; }
         
         public string Title { get; set; }
+        public bool Featured { get; set; }
         public string Description { get; set; }
         public string PrettyDescriptor { get; set; }
         public List<Post> Posts { get; set; }

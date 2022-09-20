@@ -38,6 +38,19 @@ namespace NB.EFCore
                     Role = 3
                 });
             
+            modelBuilder.Entity<UserEntity>()
+                .HasData(new UserEntity
+                {
+                    Id = 2,
+                    Firstname = "Ole",
+                    Lastname = "Bobbysen",
+                    Email = "bobby@olsen.as",
+                    Username = "test2@test.com",
+                    Password = "test1234",
+                    PhoneNumber = 42424242,
+                    Role = 3
+                });
+            
             modelBuilder.Entity<PageEntity>()
                 .HasData(new PageEntity
                 {
@@ -104,7 +117,8 @@ namespace NB.EFCore
                     Id = i,
                     Title = "Kategori " + i,
                     Description = "Tester med seedet data",
-                    PrettyDescriptor = "kategori-" + i
+                    PrettyDescriptor = "kategori-" + i,
+                    Featured = i % 2 == 0
                 });
             }
 
@@ -120,14 +134,14 @@ namespace NB.EFCore
                     generatedPosts.Add(new PostEntity
                     {
                         Id = nextId,
-                        AuthorId = 1,
+                        AuthorId = i % 2 == 0 ? 1 : 2,
                         CategoryId = i,
                         PrettyDescriptor = "post-nr-" + nextId,
                         Title = "Post " + x + " in Categori " + i,
                         Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a orci sapien. Vivamus erat quam, lobortis id tempor ac, condimentum ut turpis. Nullam vitae fermentum dolor. Ut et justo quis lacus hendrerit vulputate. Nam scelerisque nibh sed nunc rutrum porta vel tincidunt ex. Vestibulum ac nibh commodo, condimentum felis id, convallis nisi. Donec id sapien a orci malesuada vulputate. Nunc eu ultrices elit. Aliquam eget ligula euismod enim volutpat aliquam eu quis quam. Cras iaculis scelerisque neque, eget interdum magna. Donec porta tincidunt massa, non sodales erat facilisis eu.",
                         Date = DateTime.Now,
                         FeaturedImageUrl = "https://picsum.photos/800/300",
-                        Paid = true,
+                        Paid = i % 3 == 0,
                         Price = 10
                     });
                     nextId++;

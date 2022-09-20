@@ -10,9 +10,9 @@ namespace NyhedsBlog_Backend.Domain.Services
     {
         //Custom Length Constraints
         private const int
-            TitleMinimumLength = 10,
+            TitleMinimumLength = 4,
             TitleMaximumLength = 60,
-            UrlMinimumLength = 3,
+            UrlMinimumLength = 4,
             UrlMaximumLength = 20;
 
         //Custom Length Errors
@@ -81,7 +81,7 @@ namespace NyhedsBlog_Backend.Domain.Services
             if (obj.PrettyDescriptor.Length < UrlMinimumLength)
                 throw new InvalidDataException(InvalidUrl);
             
-            if (obj.PrettyDescriptor.Length < UrlMaximumLength)
+            if (obj.PrettyDescriptor.Length > UrlMaximumLength)
                 throw new InvalidDataException(InvalidUrl);
 
             return true;

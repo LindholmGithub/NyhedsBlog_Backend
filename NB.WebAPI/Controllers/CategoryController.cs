@@ -84,6 +84,7 @@ namespace NB.WebAPI.Controllers
                 return Ok(Conversion(_service.CreateCategory(new Category
                 {
                     Title = data.Title,
+                    Featured = data.Featured,
                     Description = data.Description,
                     PrettyDescriptor = data.PrettyDescriptor,
                 })));
@@ -99,7 +100,7 @@ namespace NB.WebAPI.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public ActionResult<Category_DTO_Out> UpdateCategory(int id, Category_DTO_In data)
+        public ActionResult<Category_DTO_Out> UpdateCategory(int id, [FromBody] Category_DTO_In data)
         {
             try
             {
@@ -107,6 +108,7 @@ namespace NB.WebAPI.Controllers
                 {
                     Id = id,
                     Title = data.Title,
+                    Featured = data.Featured,
                     Description = data.Description,
                     PrettyDescriptor = data.PrettyDescriptor,
                 })));
@@ -145,6 +147,7 @@ namespace NB.WebAPI.Controllers
                 Id = c.Id,
                 Description = c.Description,
                 Title = c.Title,
+                Featured = c.Featured,
                 PrettyDescriptor = c.PrettyDescriptor,
                 Posts = c.Posts.Select(p => new Post_DTO_Out
                 {
